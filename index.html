@@ -340,43 +340,28 @@
     cursor: pointer;
   }
 
-  /* ── NOTICE CARD ── */
-  .notice-card {
-    background: var(--card);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    overflow: hidden;
+  /* ── TOOLTIPS ── */
+  .term {
+    border-bottom: 1px dotted var(--ink3);
+    cursor: help;
   }
-  .notice-card-head {
-    background: var(--warn-bg);
-    border-bottom: 1px solid var(--warn-bdr);
-    padding: 14px 18px;
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: .07em;
-    color: var(--warn);
-  }
-  .notice-list {
-    padding: 6px 0;
-  }
-  .notice-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 11px 18px;
-    border-bottom: 1px solid var(--border);
-    font-size: 13.5px;
+  .term-pop {
+    position: fixed;
+    background: #1e2530;
+    color: #f0f0f0;
+    font-size: 12.5px;
+    font-weight: 400;
     line-height: 1.5;
-    color: var(--ink2);
+    padding: 10px 13px;
+    border-radius: 8px;
+    max-width: 240px;
+    z-index: 300;
+    display: none;
+    pointer-events: auto;
+    box-shadow: 0 4px 16px rgba(0,0,0,.3);
   }
-  .notice-item:last-child { border-bottom: none; }
-  .notice-item::before {
-    content: "·";
-    color: var(--ink3);
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
+  .term-pop a { color: #93c5fd; text-decoration: underline; }
+  .term-pop.visible { display: block; }
 
   /* ── RESPONSIVE / DESKTOP ── */
   @media (min-width: 640px) {
@@ -443,11 +428,6 @@
     .stat { padding: 16px 20px; border-right: 1px solid var(--border); }
     .stat:last-child { border-right: none; }
 
-    /* notice card two-column grid */
-    .notice-list { display: grid; grid-template-columns: 1fr 1fr; }
-    .notice-item:nth-child(odd):last-child { grid-column: 1 / -1; }
-    .notice-item { border-right: 1px solid var(--border); }
-    .notice-item:nth-child(even) { border-right: none; }
   }
 
   /* ── FOOTER ── */
@@ -494,7 +474,7 @@
 
     <div class="card-body">
       <p class="prose"><a href="https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#PDF2_ReportName_69114" target="_blank" rel="noopener" style="color:var(--accent);">View Item 4 on the Inner West Council website</a> — includes satellite photos, engineering plans, and traffic guidance schemes.</p>
-      <p class="prose" style="margin-top:10px;">Bunnings Group is funding road works across nine streets in Tempe's south as a condition of its development approval. Inner West Council required Bunnings to pay for a Local Area Traffic Management plan before it could open. SSTC Group of Companies is the contractor, working from design document HD 202 LATM r4.</p>
+      <p class="prose" style="margin-top:10px;">Bunnings Group is funding road works across nine streets in Tempe's south as a condition of its development approval. Inner West Council required Bunnings to pay for a <span class="term" data-tip="Local Area Traffic Management — a council plan to calm traffic in residential streets using speed humps, raised crossings, and pavement treatments.">Local Area Traffic Management</span> plan before it could open. <span class="term" data-tip="SSTC Group of Companies — the traffic management contractor carrying out the works on behalf of Bunnings.">SSTC Group of Companies</span> is the contractor, working from design document <span class="term" data-tip="The engineering design specification for these Tempe works — Inner West Council&#39;s Holbeach, Wentworth, Edwin and Tramway street design, revision 4.">HD 202 LATM r4</span>.</p>
       <p class="prose" style="margin-top:10px;">Four streets will close fully for up to three days each while speed humps are installed. Five streets get a single-day visit for coloured pavement at intersections. Union Street gets a permanent 40km/h speed limit with no road works at all. On every closure street, traffic controllers will be on site and residents can still get in and out.</p>
     </div>
 
@@ -548,12 +528,12 @@
               <div class="fact"><div class="fact-label">If delayed</div><div class="fact-value">Thu 9 – Fri 10 July</div></div>
               <div class="fact"><div class="fact-label">Work type</div><div class="fact-value">Speed hump installation</div></div>
               <div class="fact"><div class="fact-label">Overnight</div><div class="fact-value">Closure stays in place overnight</div></div>
-              <div class="fact"><div class="fact-label">Resident access</div><div class="fact-value grn">Yes, TC on site</div></div>
+              <div class="fact"><div class="fact-label">Resident access</div><div class="fact-value grn">Yes, <span class="term" data-tip="Traffic Controller — a licensed person on site who directs traffic and helps residents get in and out during the works.">TC</span> on site</div></div>
             </div>
             <div class="info-box">You should receive a letterbox notice at least 14 days before works start, so by mid-June at the latest. If it hasn't arrived by late June, call the site manager below.</div>
             <div class="contact-row">
               <span class="contact-icon">📞</span>
-              <div class="contact-text"><strong>Mitchell Montgomery</strong>, SSTC Group (on-site)<br>0468 000 737 · Office: 02 9584 0426</div>
+              <div class="contact-text"><strong>Mitchell Montgomery</strong>, <span class="term" data-tip="SSTC Group of Companies — the traffic management contractor carrying out the works on behalf of Bunnings.">SSTC Group</span> (on-site)<br>0468 000 737 · Office: 02 9584 0426</div>
             </div>
           </div>
         </div>
@@ -574,18 +554,18 @@
         </button>
         <div class="street-detail" id="detail-tramway">
           <div class="detail-inner">
-            <div class="notice">Tramway Street closes for three days between Unwin's Bridge Road and Edwin Street. A speed hump goes in first, then the crew returns on a separate day in July for line marking. Heavy vehicles are routed via Unwin's Bridge Road while the street is closed. SSTC has already notified residents on this street.</div>
+            <div class="notice">Tramway Street closes for three days between Unwin's Bridge Road and Edwin Street. A speed hump goes in first, then the crew returns on a separate day in July for line marking. Heavy vehicles are routed via Unwin's Bridge Road while the street is closed. <span class="term" data-tip="SSTC Group of Companies — the traffic management contractor carrying out the works on behalf of Bunnings.">SSTC</span> has already notified residents on this street.</div>
             <div class="fact-grid">
               <div class="fact"><div class="fact-label">Closes</div><div class="fact-value red">7am Mon 13 July</div></div>
               <div class="fact"><div class="fact-label">Reopens</div><div class="fact-value red">3pm Wed 15 July</div></div>
               <div class="fact"><div class="fact-label">If delayed</div><div class="fact-value">Thu 16 – Fri 17 July</div></div>
               <div class="fact"><div class="fact-label">Work type</div><div class="fact-value">Speed hump + line marking (two visits)</div></div>
               <div class="fact"><div class="fact-label">Heavy vehicles</div><div class="fact-value">Via Unwin's Bridge Road</div></div>
-              <div class="fact"><div class="fact-label">Resident access</div><div class="fact-value grn">Yes, TC on site</div></div>
+              <div class="fact"><div class="fact-label">Resident access</div><div class="fact-value grn">Yes, <span class="term" data-tip="Traffic Controller — a licensed person on site who directs traffic and helps residents get in and out during the works.">TC</span> on site</div></div>
             </div>
             <div class="contact-row">
               <span class="contact-icon">📞</span>
-              <div class="contact-text"><strong>Mitchell Montgomery</strong>, SSTC Group (on-site)<br>0468 000 737 · Office: 02 9584 0426</div>
+              <div class="contact-text"><strong>Mitchell Montgomery</strong>, <span class="term" data-tip="SSTC Group of Companies — the traffic management contractor carrying out the works on behalf of Bunnings.">SSTC Group</span> (on-site)<br>0468 000 737 · Office: 02 9584 0426</div>
             </div>
           </div>
         </div>
@@ -611,13 +591,13 @@
               <div class="fact"><div class="fact-label">Approx. closure week</div><div class="fact-value red">20 July 2026</div></div>
               <div class="fact"><div class="fact-label">Duration</div><div class="fact-value">~3 days</div></div>
               <div class="fact"><div class="fact-label">Work type</div><div class="fact-value">Speed hump + raised pedestrian crossing</div></div>
-              <div class="fact"><div class="fact-label">Resident access</div><div class="fact-value grn">Yes, TC on site</div></div>
+              <div class="fact"><div class="fact-label">Resident access</div><div class="fact-value grn">Yes, <span class="term" data-tip="Traffic Controller — a licensed person on site who directs traffic and helps residents get in and out during the works.">TC</span> on site</div></div>
               <div class="fact span2"><div class="fact-label">Temp No Stopping</div><div class="fact-value">North side: 26.1m outside nos. 45–49. South side: 21.7m outside Tempe Tyres (no. 46). Removed by contractor at their cost.</div></div>
             </div>
             <div class="info-box">The raised pedestrian crossing is a permanent structure. It stays after works finish. Advance warning signs go up at the Wentworth Street entrance before work begins.</div>
             <div class="contact-row">
               <span class="contact-icon">📞</span>
-              <div class="contact-text"><strong>Mitchell Montgomery</strong>, SSTC Group (on-site)<br>0468 000 737 · Office: 02 9584 0426</div>
+              <div class="contact-text"><strong>Mitchell Montgomery</strong>, <span class="term" data-tip="SSTC Group of Companies — the traffic management contractor carrying out the works on behalf of Bunnings.">SSTC Group</span> (on-site)<br>0468 000 737 · Office: 02 9584 0426</div>
             </div>
           </div>
         </div>
@@ -643,13 +623,13 @@
               <div class="fact"><div class="fact-label">Approx. closure week</div><div class="fact-value red">27 July 2026</div></div>
               <div class="fact"><div class="fact-label">Duration</div><div class="fact-value">1–3 days</div></div>
               <div class="fact"><div class="fact-label">Work type</div><div class="fact-value">Speed hump installation</div></div>
-              <div class="fact"><div class="fact-label">Resident access</div><div class="fact-value grn">Yes, TC on site</div></div>
+              <div class="fact"><div class="fact-label">Resident access</div><div class="fact-value grn">Yes, <span class="term" data-tip="Traffic Controller — a licensed person on site who directs traffic and helps residents get in and out during the works.">TC</span> on site</div></div>
               <div class="fact span2"><div class="fact-label">Temp No Stopping</div><div class="fact-value">North side: 19.2m outside nos. 13–15. South side: 19.1m outside nos. 14 and 16. Removed by contractor at their cost.</div></div>
             </div>
             <div class="info-box">If you live at nos. 13–16, this is your closure week. The northern section (nos. 45–49 side) closes the week before.</div>
             <div class="contact-row">
               <span class="contact-icon">📞</span>
-              <div class="contact-text"><strong>Mitchell Montgomery</strong>, SSTC Group (on-site)<br>0468 000 737 · Office: 02 9584 0426</div>
+              <div class="contact-text"><strong>Mitchell Montgomery</strong>, <span class="term" data-tip="SSTC Group of Companies — the traffic management contractor carrying out the works on behalf of Bunnings.">SSTC Group</span> (on-site)<br>0468 000 737 · Office: 02 9584 0426</div>
             </div>
           </div>
         </div>
@@ -676,15 +656,15 @@
               <div class="fact"><div class="fact-label">Works end</div><div class="fact-value red">3pm Wed 5 August</div></div>
               <div class="fact"><div class="fact-label">Daily hours</div><div class="fact-value">7am–3pm only</div></div>
               <div class="fact"><div class="fact-label">Overnight</div><div class="fact-value grn">Fully open each evening</div></div>
-              <div class="fact"><div class="fact-label">Work type</div><div class="fact-value">Speed hump + kerb blister + median garden bed</div></div>
+              <div class="fact"><div class="fact-label">Work type</div><div class="fact-value">Speed hump + <span class="term" data-tip="A concrete island built into the kerb to narrow the road, slowing traffic and giving pedestrians a safer point to wait.">kerb blister</span> + median garden bed</div></div>
               <div class="fact"><div class="fact-label">Temp speed limit</div><div class="fact-value">40km/h through work zone</div></div>
               <div class="fact"><div class="fact-label">If delayed</div><div class="fact-value">From 10 August 2026</div></div>
               <div class="fact"><div class="fact-label">Design plan</div><div class="fact-value">H0202</div></div>
             </div>
-            <div class="info-box">These are the last works in the schedule, finishing on the same day the project closes: 5 August. The kerb blister and median garden bed are permanent and stay after works are done.</div>
+            <div class="info-box">These are the last works in the schedule, finishing on the same day the project closes: 5 August. The <span class="term" data-tip="A concrete island built into the kerb to narrow the road, slowing traffic and giving pedestrians a safer point to wait.">kerb blister</span> and median garden bed are permanent and stay after works are done.</div>
             <div class="contact-row">
               <span class="contact-icon">📞</span>
-              <div class="contact-text"><strong>Mitchell Montgomery</strong>, SSTC Group (on-site)<br>0468 000 737 · Office: 02 9584 0426</div>
+              <div class="contact-text"><strong>Mitchell Montgomery</strong>, <span class="term" data-tip="SSTC Group of Companies — the traffic management contractor carrying out the works on behalf of Bunnings.">SSTC Group</span> (on-site)<br>0468 000 737 · Office: 02 9584 0426</div>
             </div>
           </div>
         </div>
@@ -709,12 +689,12 @@
             <div class="fact-grid">
               <div class="fact"><div class="fact-label">Approx. date</div><div class="fact-value">August 2026 (TBC)</div></div>
               <div class="fact"><div class="fact-label">Duration</div><div class="fact-value">Single day</div></div>
-              <div class="fact"><div class="fact-label">Work type</div><div class="fact-value">At-grade contrasting pavement at intersections</div></div>
+              <div class="fact"><div class="fact-label">Work type</div><div class="fact-value"><span class="term" data-tip="Coloured or textured road surface applied at intersections. Visually alerts drivers they are entering a shared or slowed zone.">At-grade contrasting pavement</span> at intersections</div></div>
               <div class="fact"><div class="fact-label">Disruption level</div><div class="fact-value grn">Low, one day only</div></div>
             </div>
             <div class="contact-row">
               <span class="contact-icon">📞</span>
-              <div class="contact-text"><strong>Mitchell Montgomery</strong>, SSTC Group (on-site)<br>0468 000 737 · Office: 02 9584 0426</div>
+              <div class="contact-text"><strong>Mitchell Montgomery</strong>, <span class="term" data-tip="SSTC Group of Companies — the traffic management contractor carrying out the works on behalf of Bunnings.">SSTC Group</span> (on-site)<br>0468 000 737 · Office: 02 9584 0426</div>
             </div>
           </div>
         </div>
@@ -739,12 +719,12 @@
             <div class="fact-grid">
               <div class="fact"><div class="fact-label">Approx. date</div><div class="fact-value">August 2026 (TBC)</div></div>
               <div class="fact"><div class="fact-label">Duration</div><div class="fact-value">Single day</div></div>
-              <div class="fact"><div class="fact-label">Work type</div><div class="fact-value">At-grade contrasting pavement at intersections</div></div>
+              <div class="fact"><div class="fact-label">Work type</div><div class="fact-value"><span class="term" data-tip="Coloured or textured road surface applied at intersections. Visually alerts drivers they are entering a shared or slowed zone.">At-grade contrasting pavement</span> at intersections</div></div>
               <div class="fact"><div class="fact-label">Disruption level</div><div class="fact-value grn">Low, one day only</div></div>
             </div>
             <div class="contact-row">
               <span class="contact-icon">📞</span>
-              <div class="contact-text"><strong>Mitchell Montgomery</strong>, SSTC Group (on-site)<br>0468 000 737 · Office: 02 9584 0426</div>
+              <div class="contact-text"><strong>Mitchell Montgomery</strong>, <span class="term" data-tip="SSTC Group of Companies — the traffic management contractor carrying out the works on behalf of Bunnings.">SSTC Group</span> (on-site)<br>0468 000 737 · Office: 02 9584 0426</div>
             </div>
           </div>
         </div>
@@ -765,7 +745,7 @@
         </button>
         <div class="street-detail" id="detail-hart">
           <div class="detail-inner">
-            <div class="notice">Hart Street covers two TGS diagram zones (J and K), which means the coloured pavement treatment is applied at more than one intersection point along the street. Still a single-day visit.</div>
+            <div class="notice">Hart Street covers two <span class="term" data-tip="Traffic Guidance Scheme — a diagram in the council plans showing exactly where barriers, signs and detour routes will be placed.">TGS</span> diagram zones (J and K), which means the coloured pavement treatment is applied at more than one intersection point along the street. Still a single-day visit.</div>
             <div class="fact-grid">
               <div class="fact"><div class="fact-label">Approx. date</div><div class="fact-value">August 2026 (TBC)</div></div>
               <div class="fact"><div class="fact-label">Duration</div><div class="fact-value">Single day</div></div>
@@ -774,7 +754,7 @@
             </div>
             <div class="contact-row">
               <span class="contact-icon">📞</span>
-              <div class="contact-text"><strong>Mitchell Montgomery</strong>, SSTC Group (on-site)<br>0468 000 737 · Office: 02 9584 0426</div>
+              <div class="contact-text"><strong>Mitchell Montgomery</strong>, <span class="term" data-tip="SSTC Group of Companies — the traffic management contractor carrying out the works on behalf of Bunnings.">SSTC Group</span> (on-site)<br>0468 000 737 · Office: 02 9584 0426</div>
             </div>
           </div>
         </div>
@@ -799,12 +779,12 @@
             <div class="fact-grid">
               <div class="fact"><div class="fact-label">Approx. date</div><div class="fact-value">August 2026 (TBC)</div></div>
               <div class="fact"><div class="fact-label">Duration</div><div class="fact-value">Single day</div></div>
-              <div class="fact"><div class="fact-label">Work type</div><div class="fact-value">At-grade contrasting pavement at intersections</div></div>
+              <div class="fact"><div class="fact-label">Work type</div><div class="fact-value"><span class="term" data-tip="Coloured or textured road surface applied at intersections. Visually alerts drivers they are entering a shared or slowed zone.">At-grade contrasting pavement</span> at intersections</div></div>
               <div class="fact"><div class="fact-label">Disruption level</div><div class="fact-value grn">Low, one day only</div></div>
             </div>
             <div class="contact-row">
               <span class="contact-icon">📞</span>
-              <div class="contact-text"><strong>Mitchell Montgomery</strong>, SSTC Group (on-site)<br>0468 000 737 · Office: 02 9584 0426</div>
+              <div class="contact-text"><strong>Mitchell Montgomery</strong>, <span class="term" data-tip="SSTC Group of Companies — the traffic management contractor carrying out the works on behalf of Bunnings.">SSTC Group</span> (on-site)<br>0468 000 737 · Office: 02 9584 0426</div>
             </div>
           </div>
         </div>
@@ -825,19 +805,19 @@
         </button>
         <div class="street-detail" id="detail-union">
           <div class="detail-inner">
-            <div class="notice">Union Street is not getting road works. The only change is a permanent speed limit reduction from 50km/h to 40km/h between Princes Highway and School Avenue. No closures, no construction noise. New speed limit signs go up once Transport for NSW gives its formal approval, which is still being sought at the time of this agenda.</div>
+            <div class="notice">Union Street is not getting road works. The only change is a permanent speed limit reduction from 50km/h to 40km/h between Princes Highway and School Avenue. No closures, no construction noise. New speed limit signs go up once <span class="term" data-tip="Transport for NSW — the state government agency that must formally approve permanent speed limit changes before new signs can go up. <a href='https://www.transport.nsw.gov.au' target='_blank'>transport.nsw.gov.au</a>">Transport for NSW</span> gives its formal approval, which is still being sought at the time of this agenda.</div>
             <div class="fact-grid">
               <div class="fact"><div class="fact-label">Current limit</div><div class="fact-value">50 km/h</div></div>
               <div class="fact"><div class="fact-label">Proposed limit</div><div class="fact-value red">40 km/h</div></div>
               <div class="fact"><div class="fact-label">Section</div><div class="fact-value">Princes Hwy to School Ave</div></div>
-              <div class="fact"><div class="fact-label">Status</div><div class="fact-value">Awaiting TfNSW concurrence</div></div>
+              <div class="fact"><div class="fact-label">Status</div><div class="fact-value">Awaiting <span class="term" data-tip="Transport for NSW — the state government agency that must formally approve permanent speed limit changes before new signs can go up.">TfNSW</span> concurrence</div></div>
               <div class="fact"><div class="fact-label">Road works</div><div class="fact-value grn">None, signs only</div></div>
-              <div class="fact"><div class="fact-label">When effective</div><div class="fact-value">After TfNSW approval (date TBC)</div></div>
+              <div class="fact"><div class="fact-label">When effective</div><div class="fact-value">After <span class="term" data-tip="Transport for NSW — the state government agency that must formally approve permanent speed limit changes before new signs can go up.">TfNSW</span> approval (date TBC)</div></div>
             </div>
             <div class="info-box">You won't get a letterbox notice for this one. Watch for new 40km/h signs appearing on the street.</div>
             <div class="contact-row">
               <span class="contact-icon">📞</span>
-              <div class="contact-text"><strong>Mitchell Montgomery</strong>, SSTC Group (on-site)<br>0468 000 737 · Office: 02 9584 0426</div>
+              <div class="contact-text"><strong>Mitchell Montgomery</strong>, <span class="term" data-tip="SSTC Group of Companies — the traffic management contractor carrying out the works on behalf of Bunnings.">SSTC Group</span> (on-site)<br>0468 000 737 · Office: 02 9584 0426</div>
             </div>
           </div>
         </div>
@@ -851,15 +831,11 @@
   </div><!-- /card -->
 
   <!-- APPLIES TO ALL STREETS -->
-  <div class="section-label" style="margin-top:4px;">Applies to all streets</div>
-  <div class="notice-card">
-    <div class="notice-card-head">What every affected resident should know</div>
-    <div class="notice-list">
-      <div class="notice-item">Residents within 50 metres of each works site receive a letterbox notice at least 14 days before the closure begins.</div>
-      <div class="notice-item">Footpaths stay open throughout. Fencing and pedestrian signs are put in place at each site.</div>
-      <div class="notice-item">Emergency vehicles have priority access under TMP-5877 at all times.</div>
-      <div class="notice-item">No bus routes run on any of the closed streets. No service disruptions expected.</div>
-      <div class="notice-item">The LTF must endorse this plan at the 18 May 2026 meeting before any works begin.</div>
+  <div class="section-label" style="margin-top:4px;">For residents</div>
+  <div class="card">
+    <div class="card-body">
+      <p class="prose">You'll receive a letterbox notice at least two weeks before works reach your street. If it hasn't arrived within a week of the scheduled start date, call Mitchell Montgomery on <strong>0468 000 737</strong>.</p>
+      <p class="prose" style="margin-top:10px;">Your driveway stays accessible throughout every closure. A <span class="term" data-tip="Traffic Controller — a licensed person on site who directs traffic and helps residents get in and out during the works.">traffic controller</span> is on site the whole time, and emergency vehicles have priority access at all times.</p>
     </div>
   </div>
 
@@ -901,6 +877,36 @@
         '<div class="panel-empty">Select a street from the list to see details.</div>';
     }
   }
+
+  // tooltips — event delegation so they work in the cloned desktop panel too
+  (function() {
+    var pop = document.createElement('div');
+    pop.className = 'term-pop';
+    document.body.appendChild(pop);
+
+    function show(el, e) {
+      pop.innerHTML = el.dataset.tip;
+      pop.classList.add('visible');
+      var x = e.clientX !== undefined ? e.clientX : el.getBoundingClientRect().left;
+      var y = e.clientY !== undefined ? e.clientY : el.getBoundingClientRect().bottom;
+      if (x + 256 > window.innerWidth) x = window.innerWidth - 260;
+      pop.style.left = Math.max(8, x) + 'px';
+      pop.style.top = (y + 12) + 'px';
+    }
+
+    document.addEventListener('click', function(e) {
+      var el = e.target.closest('.term');
+      if (el) { show(el, e); e.stopPropagation(); return; }
+      pop.classList.remove('visible');
+    });
+    document.addEventListener('mouseover', function(e) {
+      var el = e.target.closest('.term');
+      if (el) show(el, e);
+    });
+    document.addEventListener('mouseout', function(e) {
+      if (!e.target.closest('.term')) pop.classList.remove('visible');
+    });
+  })();
 
   // inject council link + close button at the bottom of each mobile detail panel
   document.querySelectorAll('.street-row').forEach(function(row) {

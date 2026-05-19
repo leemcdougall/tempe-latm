@@ -171,6 +171,35 @@
   .stat-value { font-size: 14px; font-weight: 700; color: var(--ink); line-height: 1.3; }
   .stat-value.red { color: var(--red); }
 
+  /* ── PANEL OVERVIEW (empty state) ── */
+  .overview-hint {
+    font-size: 12.5px;
+    color: var(--ink3);
+    text-align: center;
+    padding: 20px 24px 10px;
+  }
+  .overview-streets { border-top: 1px solid var(--border); }
+  .overview-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 22px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background .1s;
+  }
+  .overview-row:hover { background: #f4f4f4; }
+  .overview-row:last-child { border-bottom: none; }
+  .work-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+  .dot-closure  { background: var(--red); }
+  .dot-stopgo   { background: var(--grn); }
+  .dot-marking  { background: var(--accent); }
+  .dot-zone     { background: #7c3aed; }
+  .overview-row-main { flex: 1; min-width: 0; }
+  .overview-name  { display: block; font-size: 14px; font-weight: 600; color: var(--ink); }
+  .overview-type  { display: block; font-size: 12px; color: var(--ink3); margin-top: 1px; }
+  .overview-dates { font-size: 13px; color: var(--ink2); white-space: nowrap; }
+
   /* ── STREETS ── */
   .streets-head {
     padding: 14px 18px 12px;
@@ -387,6 +416,11 @@
 
   @media (min-width: 820px) {
     body { background: #e8e8e8; }
+
+    /* align header content with page */
+    .header { padding: 0; }
+    .header-inner { max-width: 1040px; margin: 0 auto; padding: 18px 28px 16px; }
+
     .page { max-width: 1040px; margin: 0 auto; padding: 20px 28px; }
 
     /* two-panel street layout */
@@ -463,60 +497,62 @@
 <body>
 
 <header class="header">
-  <div class="header-eyebrow">Inner West Council · LTF 18 May 2026</div>
-  <h1>Road works coming to Tempe South</h1>
-  <div class="header-meta">
-    <span class="pill pill-pending">Pending approval</span>
-    <span class="pill pill-date">6 Jul – 5 Aug 2026</span>
+  <div class="header-inner">
+    <div class="header-eyebrow">Inner West Council · 18 May 2026</div>
+    <h1>Road works coming to Tempe South</h1>
+    <div class="header-meta">
+      <span class="pill pill-pending">Meeting held 18 May</span>
+      <span class="pill pill-date">Jul – Aug 2026</span>
+    </div>
   </div>
 </header>
 
 <div class="page">
 
-  <!-- TEMPE -->
-  <div class="section-label">Tempe South, Item 4</div>
-  <div class="card">
+  <!-- WHAT'S HAPPENING -->
+  <div class="card context-card">
     <div class="tempe-head">
-      <div class="kicker">LTF0526(1) Item 4 · Midjuburi-Marrickville Ward</div>
-      <h2>Speed humps and intersection works on 9 streets</h2>
-      <span class="date-badge">6 July – 5 August 2026</span>
+      <h2>What's happening in Tempe South?</h2>
     </div>
 
     <div class="card-body">
-      <p class="prose">Select your street below to see whether your road will close, for how long, and what's being built. Works run 7am–3pm on weekdays; residents can get in and out on every closure street.</p>
+      <p class="prose">Bunnings Group is paying to install speed humps, raised pedestrian crossings, and road markings across nine streets in Tempe South. Inner West Council required these traffic calming works as a condition of approving Bunnings' new store.</p>
+      <p class="prose" style="margin-top:8px;"><strong>Select your street in the panel below</strong> to see your exact closure dates, what's being built, and how to get in and out while works are underway.</p>
       <details style="margin-top:10px;">
         <summary style="font-size:13px;color:var(--ink3);cursor:pointer;">Background &amp; council documents</summary>
         <div style="margin-top:8px;">
-          <p class="prose">Bunnings Group is funding these works across nine streets as a condition of its development approval. Inner West Council required Bunnings to pay for a Local Area Traffic Management plan before it could open. SSTC Group of Companies is the contractor (design document HD 202 LATM r4).</p>
-          <p class="prose" style="margin-top:8px;">Four streets will close fully for up to three days each while speed humps are installed. Five streets get a single-day visit for coloured pavement at intersections. Union Street gets a permanent 40km/h speed limit only — no road works.</p>
-          <p class="prose" style="margin-top:8px;"><a href="https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#PDF2_ReportName_69114" target="_blank" rel="noopener" style="color:var(--accent);">View Item 4 on the Inner West Council website</a> — satellite photos, engineering plans, and traffic guidance schemes. <a href="https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#PDF1_Contents" target="_blank" rel="noopener" style="color:var(--accent);">Full LTF agenda</a> (17 items).</p>
+          <p class="prose">Before Bunnings could get development approval for its Tempe store, Inner West Council required it to fund a Local Area Traffic Management scheme — a set of traffic calming improvements on surrounding streets. The plan covers nine streets and was prepared by SSTC Group of Companies.</p>
+          <p class="prose" style="margin-top:8px;">Four streets will close fully for up to three days each while speed humps are installed. Five streets get a single-day visit for coloured pavement markings at intersections. Union Street gets a permanent 40km/h speed limit with no road works.</p>
+          <p class="prose" style="margin-top:8px;"><a href="https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#PDF2_ReportName_69114" target="_blank" rel="noopener" style="color:var(--accent);">View the full engineering plan on the Inner West Council website</a> — satellite photos, designs, and traffic guidance schemes. <a href="https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#PDF1_Contents" target="_blank" rel="noopener" style="color:var(--accent);">Full council meeting agenda</a> (17 items).</p>
         </div>
       </details>
     </div>
 
     <div class="stat-row">
       <div class="stat">
-        <span class="stat-label">Main works</span>
+        <span class="stat-label">Works run</span>
         <span class="stat-value red">6 Jul – 5 Aug 2026</span>
       </div>
       <div class="stat">
-        <span class="stat-label">Backup window</span>
+        <span class="stat-label">If delayed</span>
         <span class="stat-value">10–22 Aug 2026</span>
       </div>
       <div class="stat">
         <span class="stat-label">Working hours</span>
-        <span class="stat-value">7am – 3pm weekdays</span>
+        <span class="stat-value">7am–3pm weekdays</span>
       </div>
       <div class="stat">
-        <span class="stat-label">Client</span>
+        <span class="stat-label">Funded by</span>
         <span class="stat-value">Bunnings Group</span>
       </div>
     </div>
+  </div>
 
-    <!-- STREETS -->
+  <!-- STREET PICKER -->
+  <div class="card picker-card">
     <div class="streets-head">
-      <h3>Streets affected</h3>
-      <p>Select your street for full details</p>
+      <h3>Find your street</h3>
+      <p>Select a street to see closure dates and what's being built</p>
     </div>
 
     <div class="streets-body">
@@ -841,29 +877,35 @@
 
     </div><!-- /street-list -->
       <div class="detail-panel">
-        <div class="panel-empty">Select a street from the list to see details.</div>
+        <div class="panel-empty">
+          <div style="background:var(--accent-bg);border:1px solid #bfdbfe;border-radius:10px;padding:18px 22px;display:flex;align-items:center;gap:14px;max-width:380px;margin:0 auto;">
+            <span style="font-size:22px;line-height:1;">←</span>
+            <p style="font-size:14px;font-weight:600;color:var(--accent);line-height:1.45;margin:0;">Select a street from the list to see your closure dates and what's being built</p>
+          </div>
+        </div>
       </div>
     </div><!-- /streets-body -->
   </div><!-- /card -->
 
-  <!-- APPLIES TO ALL STREETS -->
-  <div class="section-label" style="margin-top:4px;">Applies to all streets</div>
-  <div class="notice-card">
-    <div class="notice-card-head">What every affected resident should know</div>
-    <div class="notice-list">
-      <div class="notice-item">Residents within 50 metres of each works site receive a letterbox notice at least 14 days before the closure begins.</div>
-      <div class="notice-item">Footpaths stay open throughout. Fencing and pedestrian signs are put in place at each site.</div>
-      <div class="notice-item">Emergency vehicles have priority access under TMP-5877 at all times.</div>
-      <div class="notice-item">No bus routes run on any of the closed streets. No service disruptions expected.</div>
-      <div class="notice-item">The LTF must endorse this plan at the 18 May 2026 meeting before any works begin.</div>
+  <!-- FOR ALL RESIDENTS -->
+  <div class="card footer-card">
+    <div class="card-body">
+      <p style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--ink3);margin-bottom:10px;">For all affected residents</p>
+      <ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:7px;">
+        <li class="prose">You should get a letterbox notice at least 14 days before works start on your street — so by mid-June for the first closures.</li>
+        <li class="prose">Footpaths stay open throughout. Fencing and pedestrian signs are put in place at each site.</li>
+        <li class="prose">Emergency vehicles have priority access at all times.</li>
+        <li class="prose">No bus routes run on any of the closed streets.</li>
+        <li class="prose">Works are subject to council approving the plan at the 18 May 2026 meeting.</li>
+      </ul>
     </div>
   </div>
 
 </div><!-- /page -->
 
 <div class="footer">
-  Inner West LTF · LTF0526(1) Item 4 · TMP-5877 · HD 202 LATM r4<br>
-  Data from council agenda pages 38–80 · Meeting 18 May 2026
+  Based on Inner West Council traffic committee agenda · 18 May 2026<br>
+  Data sourced from Traffic Management Plan TMP-5877 and Tempe South LATM design HD 202 r4
 </div>
 
 <script>

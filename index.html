@@ -490,6 +490,7 @@
     <div class="card-body">
       <p class="prose">The Local Transport Forum is an advisory committee of Inner West Council. It reviews traffic and parking proposals from council engineers, hears resident and authority input, then makes recommendations for council approval. The LTF does not make final decisions. It recommends, and council formally resolves.</p>
       <p class="prose" style="margin-top:10px;">This is the pre-meeting agenda for the 18 May 2026 meeting. No decisions have been recorded here yet.</p>
+      <p class="prose" style="margin-top:10px;"><a href="https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#PDF1_Contents" target="_blank" rel="noopener" style="color:var(--accent);">Full agenda on Inner West Council website</a> — all 17 items, includes satellite photos and engineering plans.</p>
     </div>
   </div>
 
@@ -503,7 +504,8 @@
     </div>
 
     <div class="card-body">
-      <p class="prose">Bunnings Group is funding road works across nine streets in Tempe's south as a condition of its development approval. Inner West Council required Bunnings to pay for a Local Area Traffic Management plan before it could open. SSTC Group of Companies is the contractor, working from design document HD 202 LATM r4.</p>
+      <p class="prose"><a href="https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#PDF2_ReportName_69114" target="_blank" rel="noopener" style="color:var(--accent);">View Item 4 on the Inner West Council website</a> — includes satellite photos, engineering plans, and traffic guidance schemes.</p>
+      <p class="prose" style="margin-top:10px;">Bunnings Group is funding road works across nine streets in Tempe's south as a condition of its development approval. Inner West Council required Bunnings to pay for a Local Area Traffic Management plan before it could open. SSTC Group of Companies is the contractor, working from design document HD 202 LATM r4.</p>
       <p class="prose" style="margin-top:10px;">Four streets will close fully for up to three days each while speed humps are installed. Five streets get a single-day visit for coloured pavement at intersections. Union Street gets a permanent 40km/h speed limit with no road works at all. On every closure street, traffic controllers will be on site and residents can still get in and out.</p>
     </div>
 
@@ -1178,15 +1180,23 @@
     }
   }
 
-  // inject a close button at the bottom of each mobile detail panel
+  // inject council link + close button at the bottom of each mobile detail panel
   document.querySelectorAll('.street-row').forEach(function(row) {
     var streetBtn = row.querySelector('.street-btn');
     var id = streetBtn.id.replace('btn-', '');
+    var inner = row.querySelector('.detail-inner');
+
+    var councilLink = document.createElement('div');
+    councilLink.className = 'contact-row';
+    councilLink.innerHTML = '<span class="contact-icon">🏛️</span>'
+      + '<div class="contact-text"><a href="https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#PDF2_ReportName_69114" target="_blank" rel="noopener" style="color:var(--accent);font-weight:700;">View Item 4 on the Inner West Council website</a><br>Full council agenda — satellite photos and engineering plans</div>';
+    inner.appendChild(councilLink);
+
     var closeBtn = document.createElement('button');
     closeBtn.className = 'close-btn';
     closeBtn.textContent = 'Close';
     closeBtn.onclick = function() { toggle(id); };
-    row.querySelector('.detail-inner').appendChild(closeBtn);
+    inner.appendChild(closeBtn);
   });
 </script>
 </body>

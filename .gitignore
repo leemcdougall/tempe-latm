@@ -3,3 +3,6 @@
 CLAUDE.md
 .claude/
 ltf_report.html
+.DS_Store
+tempe_map_fragment.svg
+serve.py

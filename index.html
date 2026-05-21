@@ -3,11 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Inner West LTF — What the Tempe Works Mean for Your Street</title>
-<meta property="og:title" content="Inner West LTF — What the Tempe Works Mean for Your Street">
-<meta property="og:description" content="Find out exactly how the Bunnings LATM construction affects your street in Tempe — dates, road closures, and detours.">
-<meta property="og:type" content="website">
-<meta name="description" content="Find out exactly how the Bunnings LATM construction affects your street in Tempe — dates, road closures, and detours.">
+<title>Inner West Watch — What's happening near you</title>
+<meta name="description" content="Plain-language summaries of Inner West Council decisions that affect your street — crossings, traffic calming, parking, and speed limits.">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -22,11 +19,12 @@
     --accent-bg: #eff4ff;
     --warn:      #c2410c;
     --warn-bg:   #fff7ed;
-    --warn-bdr:  #fed7aa;
     --red:       #dc2626;
     --red-bg:    #fef2f2;
     --grn:       #15803d;
     --grn-bg:    #f0fdf4;
+    --ylw:       #92400e;
+    --ylw-bg:    #fffbeb;
     --shadow:    0 1px 4px rgba(0,0,0,.08), 0 0 1px rgba(0,0,0,.05);
     --radius:    14px;
     --radius-sm: 8px;
@@ -61,903 +59,469 @@
     margin-bottom: 3px;
   }
   .header h1 {
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--ink);
-    letter-spacing: -.02em;
-    line-height: 1.2;
-  }
-  .header-meta {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 8px;
-  }
-  .pill {
-    display: inline-flex;
-    align-items: center;
-    font-size: 11px;
-    font-weight: 600;
-    border-radius: 20px;
-    padding: 3px 9px;
-    letter-spacing: .02em;
-  }
-  .pill-pending { background: #fef9c3; color: #854d0e; }
-  .pill-date    { background: var(--accent-bg); color: var(--accent); }
-
-  /* ── PAGE BODY ── */
-  .page {
-    max-width: 560px;
-    margin: 0 auto;
-    padding: 20px 16px 60px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-
-  /* ── CARD ── */
-  .card {
-    background: var(--card);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    overflow: hidden;
-  }
-  .card-body { padding: 18px 18px; }
-  .card-body + .card-body { border-top: 1px solid var(--border); }
-
-  /* ── SECTION LABEL ── */
-  .section-label {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: .09em;
-    color: var(--ink3);
-    padding: 0 4px;
-    margin-top: 6px;
-  }
-
-  /* ── PROSE ── */
-  .prose {
-    font-size: 14.5px;
-    line-height: 1.65;
-    color: var(--ink2);
-  }
-  .prose + .prose { margin-top: 10px; }
-  .prose strong { color: var(--ink); font-weight: 600; }
-
-  /* ── TEMPE HEADER CARD ── */
-  .tempe-head {
-    padding: 18px 18px 16px;
-    border-bottom: 1px solid var(--border);
-  }
-  .tempe-head .kicker {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: .08em;
-    color: var(--warn);
-    margin-bottom: 6px;
-  }
-  .tempe-head h2 {
     font-size: 20px;
     font-weight: 800;
     color: var(--ink);
     letter-spacing: -.03em;
-    line-height: 1.2;
-    margin-bottom: 6px;
+    line-height: 1.1;
   }
-  .tempe-head .date-badge {
+  .header-sub {
+    font-size: 13px;
+    color: var(--ink3);
+    margin-top: 4px;
+  }
+
+  /* ── FILTER BAR ── */
+  .filter-bar {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+  }
+  .filter-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--ink3);
+    margin-right: 2px;
+    white-space: nowrap;
+  }
+  .chip {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 20px;
     font-size: 12px;
     font-weight: 600;
-    color: var(--red);
-    background: var(--red-bg);
-    border-radius: 20px;
-    padding: 4px 10px;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    color: var(--ink2);
+    cursor: pointer;
+    transition: background .1s, color .1s, border-color .1s;
+    white-space: nowrap;
+  }
+  .chip:hover { background: var(--bg); }
+  .chip.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
   }
 
-  /* ── STAT ROW ── */
-  .stat-row {
+  /* ── PAGE BODY ── */
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 20px 16px 48px;
+  }
+
+  .section-heading {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--ink3);
+    margin: 0 0 12px;
+  }
+
+  /* ── CARD GRID ── */
+  .card-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 10px;
-    padding: 16px 18px;
-    border-bottom: 1px solid var(--border);
   }
-  .stat { display: flex; flex-direction: column; gap: 2px; }
-  .stat-label { font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--ink3); }
-  .stat-value { font-size: 14px; font-weight: 700; color: var(--ink); line-height: 1.3; }
-  .stat-value.red { color: var(--red); }
-
-  /* ── PANEL OVERVIEW (empty state) ── */
-  .overview-hint {
-    font-size: 12.5px;
-    color: var(--ink3);
-    text-align: center;
-    padding: 20px 24px 10px;
+  @media (min-width: 600px) {
+    .card-grid { grid-template-columns: 1fr 1fr; }
   }
-  .overview-streets { border-top: 1px solid var(--border); }
-  .overview-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 11px 22px;
-    border-bottom: 1px solid var(--border);
-    cursor: pointer;
-    transition: background .1s;
-  }
-  .overview-row:hover { background: #f4f4f4; }
-  .overview-row:last-child { border-bottom: none; }
-  .work-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
-  .dot-closure  { background: var(--red); }
-  .dot-stopgo   { background: var(--grn); }
-  .dot-marking  { background: var(--accent); }
-  .dot-zone     { background: #7c3aed; }
-  .overview-row-main { flex: 1; min-width: 0; }
-  .overview-name  { display: block; font-size: 14px; font-weight: 600; color: var(--ink); }
-  .overview-type  { display: block; font-size: 12px; color: var(--ink3); margin-top: 1px; }
-  .overview-dates { font-size: 13px; color: var(--ink2); white-space: nowrap; }
-
-  /* ── STREETS ── */
-  .streets-head {
-    padding: 14px 18px 12px;
-    border-bottom: 1px solid var(--border);
-  }
-  .streets-head h3 {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--ink);
-  }
-  .streets-head p {
-    font-size: 12.5px;
-    color: var(--ink3);
-    margin-top: 2px;
-  }
-  .street-list { display: flex; flex-direction: column; }
-  .street-row {
-    border-bottom: 1px solid var(--border);
-  }
-  .street-row:last-child { border-bottom: none; }
-
-  .street-btn {
-    width: 100%;
-    background: none;
-    border: none;
-    padding: 14px 18px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    cursor: pointer;
-    text-align: left;
-    -webkit-tap-highlight-color: transparent;
-    transition: background .12s;
-  }
-  .street-btn:active { background: #f5f5f5; }
-  .street-btn.open { background: var(--accent-bg); }
-
-  .street-btn-left { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; }
-  .street-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 9px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    flex-shrink: 0;
-  }
-  .icon-closure { background: var(--red-bg); }
-  .icon-stopgo  { background: var(--grn-bg); }
-  .icon-marking { background: var(--accent-bg); }
-  .icon-zone    { background: #f5f3ff; }
-
-  .street-text { min-width: 0; }
-  .street-name {
-    font-size: 14.5px;
-    font-weight: 700;
-    color: var(--ink);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .street-btn.open .street-name { color: var(--accent); }
-  .street-sub {
-    font-size: 12px;
-    color: var(--ink3);
-    margin-top: 1px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  @media (min-width: 820px) {
+    .card-grid { grid-template-columns: 1fr 1fr 1fr; }
   }
 
-  .street-tag {
-    font-size: 10.5px;
-    font-weight: 700;
-    border-radius: 6px;
-    padding: 3px 8px;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-  .tag-closure { background: var(--red-bg);   color: var(--red); }
-  .tag-stopgo  { background: var(--grn-bg);   color: var(--grn); }
-  .tag-marking { background: var(--accent-bg); color: var(--accent); }
-  .tag-zone    { background: #f5f3ff; color: #6d28d9; }
-
-  .chevron {
-    width: 16px;
-    height: 16px;
-    flex-shrink: 0;
-    color: var(--ink3);
-    transition: transform .2s;
-  }
-  .street-btn.open .chevron { transform: rotate(180deg); color: var(--accent); }
-
-  /* ── DETAIL PANEL ── */
-  .street-detail {
-    display: none;
-    border-top: 1px solid var(--border);
-    background: #fafafa;
-  }
-  .street-detail.open { display: block; }
-
-  .detail-inner { padding: 18px; display: flex; flex-direction: column; gap: 14px; }
-
-  .notice {
-    border-left: 3px solid var(--warn);
-    background: var(--warn-bg);
-    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-    padding: 12px 14px;
-    font-size: 13.5px;
-    line-height: 1.6;
-    color: var(--ink);
-  }
-
-  .fact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
-  .fact {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 11px 13px;
-  }
-  .fact.span2 { grid-column: 1 / -1; }
-  .fact-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--ink3); margin-bottom: 3px; }
-  .fact-value { font-size: 13.5px; font-weight: 600; color: var(--ink); line-height: 1.4; }
-  .fact-value.red { color: var(--red); }
-  .fact-value.grn { color: var(--grn); }
-
-  .info-box {
-    background: var(--accent-bg);
-    border-radius: var(--radius-sm);
-    padding: 13px 14px;
-    font-size: 13px;
-    line-height: 1.6;
-    color: #1e3a5f;
-  }
-
-  .contact-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 12px 14px;
-  }
-  .contact-icon { font-size: 20px; flex-shrink: 0; }
-  .contact-text { font-size: 13px; line-height: 1.5; color: var(--ink2); }
-  .contact-text strong { color: var(--ink); font-weight: 700; }
-
-  /* ── CLOSE BUTTON (mobile only) ── */
-  .close-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 11px 14px;
-    background: none;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    font-size: 13px;
-    color: var(--ink3);
-    cursor: pointer;
-  }
-
-  /* ── NOTICE CARD ── */
-  .notice-card {
+  /* ── ITEM CARD ── */
+  .item-card {
     background: var(--card);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
-    overflow: hidden;
+    padding: 14px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow .15s;
   }
-  .notice-card-head {
-    background: var(--warn-bg);
-    border-bottom: 1px solid var(--warn-bdr);
-    padding: 14px 18px;
-    font-size: 12px;
+  .item-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,.12), 0 0 1px rgba(0,0,0,.06);
+  }
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    align-items: center;
+  }
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: .07em;
-    color: var(--warn);
+    letter-spacing: .05em;
+    white-space: nowrap;
   }
-  .notice-list {
-    padding: 6px 0;
+  .tag-crossing { background: #dbeafe; color: #1e40af; }
+  .tag-latm     { background: #ffedd5; color: #9a3412; }
+  .tag-parking  { background: #ede9fe; color: #5b21b6; }
+  .tag-speed    { background: #dcfce7; color: #166534; }
+  .tag-event    { background: #fce7f3; color: #9d174d; }
+  .tag-suburb   { background: var(--bg); color: var(--ink3); font-weight: 600; }
+
+  .card-headline {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--ink);
+    letter-spacing: -.01em;
   }
-  .notice-item {
+
+  .card-footer {
     display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 11px 18px;
-    border-bottom: 1px solid var(--border);
-    font-size: 13.5px;
-    line-height: 1.5;
-    color: var(--ink2);
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    gap: 8px;
   }
-  .notice-item:last-child { border-bottom: none; }
-  .notice-item::before {
-    content: "·";
+  .card-meeting {
+    font-size: 11px;
     color: var(--ink3);
-    flex-shrink: 0;
-    margin-top: 1px;
   }
-
-  /* ── RESPONSIVE / DESKTOP ── */
-  @media (min-width: 640px) {
-    .page { padding: 16px 24px; }
-    .stat-row { grid-template-columns: repeat(4, 1fr); }
-    .fact-grid { grid-template-columns: repeat(3, 1fr); }
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    white-space: nowrap;
   }
+  .status-on-agenda    { background: var(--ylw-bg); color: var(--ylw); }
+  .status-held         { background: #f1f5f9; color: #475569; }
+  .status-forum-yes    { background: var(--grn-bg); color: var(--grn); }
+  .status-forum-amended{ background: var(--accent-bg); color: var(--accent); }
+  .status-forum-no     { background: var(--red-bg); color: var(--red); }
+  .status-confirmed    { background: var(--grn-bg); color: var(--grn); }
+  .status-works-coming { background: var(--warn-bg); color: var(--warn); }
 
-  @media (min-width: 820px) {
-    body { background: #e8e8e8; }
-
-    /* align header content with page */
-    .header { padding: 0; }
-    .header-inner { max-width: 1040px; margin: 0 auto; padding: 18px 28px 16px; }
-
-    .page { max-width: 1040px; margin: 0 auto; padding: 20px 28px; }
-
-    /* two-panel street layout */
-    .streets-body {
-      display: flex;
-      align-items: stretch;
-      min-height: 520px;
-    }
-    .street-list {
-      width: 280px;
-      flex-shrink: 0;
-      border-right: 1px solid var(--border);
-      overflow-y: auto;
-      max-height: 640px;
-    }
-    /* suppress inline accordions on desktop */
-    .street-detail { display: none !important; }
-    .chevron { display: none; }
-    .close-btn { display: none; }
-    .street-btn.open { background: var(--accent-bg); border-left: 3px solid var(--accent); }
-    .street-btn:not(.open):hover { background: #f7f7f7; }
-
-    /* right-side detail panel */
-    .detail-panel {
-      flex: 1;
-      display: block;
-      overflow-y: auto;
-      max-height: 640px;
-      background: #fafafa;
-    }
-    .detail-panel .detail-inner {
-      padding: 22px 26px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .detail-panel .fact-grid { grid-template-columns: repeat(3, 1fr); }
-    .panel-empty {
-      padding: 48px 32px;
-      text-align: center;
-      color: var(--ink3);
-      font-size: 14px;
-      line-height: 1.6;
-    }
-    .panel-street-title {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--ink);
-      padding: 20px 26px 0;
-    }
-
-    /* stat row full-width cells */
-    .stat-row { gap: 0; }
-    .stat { padding: 16px 20px; border-right: 1px solid var(--border); }
-    .stat:last-child { border-right: none; }
-
-    /* notice card two-column grid */
-    .notice-list { display: grid; grid-template-columns: 1fr 1fr; }
-    .notice-item:nth-child(odd):last-child { grid-column: 1 / -1; }
-    .notice-item { border-right: 1px solid var(--border); }
-    .notice-item:nth-child(even) { border-right: none; }
+  .card-link {
+    font-size: 11px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    white-space: nowrap;
   }
+  .card-link:hover { text-decoration: underline; }
 
-  /* ── FOOTER ── */
-  .footer {
+  /* ── EMPTY STATE ── */
+  .empty-state {
+    grid-column: 1 / -1;
     text-align: center;
-    font-size: 11.5px;
+    padding: 48px 0;
     color: var(--ink3);
-    padding: 10px 20px 40px;
-    line-height: 1.6;
+    font-size: 14px;
   }
+
+  /* ── HIDDEN ── */
+  .hidden { display: none !important; }
 </style>
 </head>
 <body>
 
 <header class="header">
-  <div class="header-inner">
-    <div class="header-eyebrow">Inner West Council · 18 May 2026</div>
-    <h1>Road works coming to Tempe South</h1>
-    <div class="header-meta">
-      <span class="pill pill-pending">Meeting held 18 May</span>
-      <span class="pill pill-date">Jul – Aug 2026</span>
-    </div>
-  </div>
+  <div class="header-eyebrow">Inner West Council</div>
+  <h1>What's happening near you</h1>
+  <p class="header-sub">Plain-language summaries of council decisions affecting Inner West streets.</p>
 </header>
 
-<div class="page">
-
-  <!-- WHAT'S HAPPENING -->
-  <div class="card context-card">
-    <div class="tempe-head">
-      <h2>What's happening in Tempe South?</h2>
-    </div>
-
-    <div class="card-body">
-      <p class="prose">Bunnings Group is paying to install speed humps, raised pedestrian crossings, and road markings across nine streets in Tempe South. Inner West Council required these traffic calming works as a condition of approving Bunnings' new store.</p>
-      <p class="prose" style="margin-top:8px;"><strong>Select your street in the panel below</strong> to see your exact closure dates, what's being built, and how to get in and out while works are underway.</p>
-      <details style="margin-top:10px;">
-        <summary style="font-size:13px;color:var(--ink3);cursor:pointer;">Background &amp; council documents</summary>
-        <div style="margin-top:8px;">
-          <p class="prose">Before Bunnings could get development approval for its Tempe store, Inner West Council required it to fund a Local Area Traffic Management scheme — a set of traffic calming improvements on surrounding streets. The plan covers nine streets and was prepared by SSTC Group of Companies.</p>
-          <p class="prose" style="margin-top:8px;">Four streets will close fully for up to three days each while speed humps are installed. Five streets get a single-day visit for coloured pavement markings at intersections. Union Street gets a permanent 40km/h speed limit with no road works.</p>
-          <p class="prose" style="margin-top:8px;"><a href="https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#PDF2_ReportName_69114" target="_blank" rel="noopener" style="color:var(--accent);">View the full engineering plan on the Inner West Council website</a> — satellite photos, designs, and traffic guidance schemes. <a href="https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#PDF1_Contents" target="_blank" rel="noopener" style="color:var(--accent);">Full council meeting agenda</a> (17 items).</p>
-        </div>
-      </details>
-    </div>
-
-    <div class="stat-row">
-      <div class="stat">
-        <span class="stat-label">Works run</span>
-        <span class="stat-value red">6 Jul – 5 Aug 2026</span>
-      </div>
-      <div class="stat">
-        <span class="stat-label">If delayed</span>
-        <span class="stat-value">10–22 Aug 2026</span>
-      </div>
-      <div class="stat">
-        <span class="stat-label">Working hours</span>
-        <span class="stat-value">7am–3pm weekdays</span>
-      </div>
-      <div class="stat">
-        <span class="stat-label">Funded by</span>
-        <span class="stat-value">Bunnings Group</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- STREET PICKER -->
-  <div class="card picker-card">
-    <div class="streets-head">
-      <h3>Find your street</h3>
-      <p>Select a street to see closure dates and what's being built</p>
-    </div>
-
-    <div class="streets-body">
-    <div class="street-list">
-
-      <!-- EDWIN ST -->
-      <div class="street-row">
-        <button class="street-btn" id="btn-edwin" onclick="toggle('edwin')">
-          <div class="street-btn-left">
-            <div class="street-icon icon-closure">🚧</div>
-            <div class="street-text">
-              <div class="street-name">Edwin Street</div>
-              <div class="street-sub">6–8 July 2026</div>
-            </div>
-          </div>
-          <span class="street-tag tag-closure">Full closure</span>
-          <svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="4,6 8,10 12,6"/></svg>
-        </button>
-        <div class="street-detail" id="detail-edwin">
-          <div class="detail-inner">
-            <div class="notice">Your street closes for three days while a speed hump is installed between Stanley Street and Tramway Street. You can still get in and out. A traffic controller will be on site the whole time. Through traffic is detoured via surrounding streets.</div>
-            <div class="fact-grid">
-              <div class="fact"><div class="fact-label">Closes</div><div class="fact-value red">7am Mon 6 July</div></div>
-              <div class="fact"><div class="fact-label">Reopens</div><div class="fact-value red">3pm Wed 8 July</div></div>
-              <div class="fact"><div class="fact-label">If delayed</div><div class="fact-value">Thu 9 – Fri 10 July</div></div>
-              <div class="fact"><div class="fact-label">Work type</div><div class="fact-value">Speed hump installation</div></div>
-              <div class="fact"><div class="fact-label">Overnight</div><div class="fact-value">Closure stays in place overnight</div></div>
-              <div class="fact"><div class="fact-label">Resident access</div><div class="fact-value grn">Yes, TC on site</div></div>
-            </div>
-            <div class="info-box">You should receive a letterbox notice at least 14 days before works start, so by mid-June at the latest. If it hasn't arrived by late June, call the site manager below.</div>
-            <div class="contact-row">
-              <span class="contact-icon">📞</span>
-              <div class="contact-text"><strong>Mitchell Montgomery</strong>, SSTC Group (on-site)<br>0468 000 737 · Office: 02 9584 0426</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- TRAMWAY ST -->
-      <div class="street-row">
-        <button class="street-btn" id="btn-tramway" onclick="toggle('tramway')">
-          <div class="street-btn-left">
-            <div class="street-icon icon-closure">🚧</div>
-            <div class="street-text">
-              <div class="street-name">Tramway Street</div>
-              <div class="street-sub">13–15 July 2026</div>
-            </div>
-          </div>
-          <span class="street-tag tag-closure">Full closure</span>
-          <svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="4,6 8,10 12,6"/></svg>
-        </button>
-        <div class="street-detail" id="detail-tramway">
-          <div class="detail-inner">
-            <div class="notice">Tramway Street closes for three days between Unwin's Bridge Road and Edwin Street. A speed hump goes in first, then the crew returns on a separate day in July for line marking. Heavy vehicles are routed via Unwin's Bridge Road while the street is closed. SSTC has already notified residents on this street.</div>
-            <div class="fact-grid">
-              <div class="fact"><div class="fact-label">Closes</div><div class="fact-value red">7am Mon 13 July</div></div>
-              <div class="fact"><div class="fact-label">Reopens</div><div class="fact-value red">3pm Wed 15 July</div></div>
-              <div class="fact"><div class="fact-label">If delayed</div><div class="fact-value">Thu 16 – Fri 17 July</div></div>
-              <div class="fact"><div class="fact-label">Work type</div><div class="fact-value">Speed hump + line marking (two visits)</div></div>
-              <div class="fact"><div class="fact-label">Heavy vehicles</div><div class="fact-value">Via Unwin's Bridge Road</div></div>
-              <div class="fact"><div class="fact-label">Resident access</div><div class="fact-value grn">Yes, TC on site</div></div>
-            </div>
-            <div class="contact-row">
-              <span class="contact-icon">📞</span>
-              <div class="contact-text"><strong>Mitchell Montgomery</strong>, SSTC Group (on-site)<br>0468 000 737 · Office: 02 9584 0426</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- WENTWORTH N -->
-      <div class="street-row">
-        <button class="street-btn" id="btn-wentworth-n" onclick="toggle('wentworth-n')">
-          <div class="street-btn-left">
-            <div class="street-icon icon-closure">🚧</div>
-            <div class="street-text">
-              <div class="street-name">Wentworth St (north)</div>
-              <div class="street-sub">Week of 20 July 2026</div>
-            </div>
-          </div>
-          <span class="street-tag tag-closure">Full closure</span>
-          <svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="4,6 8,10 12,6"/></svg>
-        </button>
-        <div class="street-detail" id="detail-wentworth-n">
-          <div class="detail-inner">
-            <div class="notice">The northern half of Wentworth Street, between Princes Highway and South Street, closes for approximately three days. A speed hump and a raised pedestrian crossing go in during this visit. Temporary No Stopping signs are installed on both sides of the street near nos. 45–49 and Tempe Tyres at no. 46, and removed at the contractor's cost when works finish.</div>
-            <div class="fact-grid">
-              <div class="fact"><div class="fact-label">Approx. closure week</div><div class="fact-value red">20 July 2026</div></div>
-              <div class="fact"><div class="fact-label">Duration</div><div class="fact-value">~3 days</div></div>
-              <div class="fact"><div class="fact-label">Work type</div><div class="fact-value">Speed hump + raised pedestrian crossing</div></div>
-              <div class="fact"><div class="fact-label">Resident access</div><div class="fact-value grn">Yes, TC on site</div></div>
-              <div class="fact span2"><div class="fact-label">Temp No Stopping</div><div class="fact-value">North side: 26.1m outside nos. 45–49. South side: 21.7m outside Tempe Tyres (no. 46). Removed by contractor at their cost.</div></div>
-            </div>
-            <div class="info-box">The raised pedestrian crossing is a permanent structure. It stays after works finish. Advance warning signs go up at the Wentworth Street entrance before work begins.</div>
-            <div class="contact-row">
-              <span class="contact-icon">📞</span>
-              <div class="contact-text"><strong>Mitchell Montgomery</strong>, SSTC Group (on-site)<br>0468 000 737 · Office: 02 9584 0426</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- WENTWORTH S -->
-      <div class="street-row">
-        <button class="street-btn" id="btn-wentworth-s" onclick="toggle('wentworth-s')">
-          <div class="street-btn-left">
-            <div class="street-icon icon-closure">🚧</div>
-            <div class="street-text">
-              <div class="street-name">Wentworth St (south)</div>
-              <div class="street-sub">Week of 27 July 2026</div>
-            </div>
-          </div>
-          <span class="street-tag tag-closure">Full closure</span>
-          <svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="4,6 8,10 12,6"/></svg>
-        </button>
-        <div class="street-detail" id="detail-wentworth-s">
-          <div class="detail-inner">
-            <div class="notice">The southern half of Wentworth Street, between South Street and Princes Highway, gets its own closure the week after the northern section. One to three days for a speed hump. Temporary No Stopping signs go in near nos. 13–16 on both sides, removed by the contractor when done.</div>
-            <div class="fact-grid">
-              <div class="fact"><div class="fact-label">Approx. closure week</div><div class="fact-value red">27 July 2026</div></div>
-              <div class="fact"><div class="fact-label">Duration</div><div class="fact-value">1–3 days</div></div>
-              <div class="fact"><div class="fact-label">Work type</div><div class="fact-value">Speed hump installation</div></div>
-              <div class="fact"><div class="fact-label">Resident access</div><div class="fact-value grn">Yes, TC on site</div></div>
-              <div class="fact span2"><div class="fact-label">Temp No Stopping</div><div class="fact-value">North side: 19.2m outside nos. 13–15. South side: 19.1m outside nos. 14 and 16. Removed by contractor at their cost.</div></div>
-            </div>
-            <div class="info-box">If you live at nos. 13–16, this is your closure week. The northern section (nos. 45–49 side) closes the week before.</div>
-            <div class="contact-row">
-              <span class="contact-icon">📞</span>
-              <div class="contact-text"><strong>Mitchell Montgomery</strong>, SSTC Group (on-site)<br>0468 000 737 · Office: 02 9584 0426</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- HOLBEACH AVE -->
-      <div class="street-row">
-        <button class="street-btn" id="btn-holbeach" onclick="toggle('holbeach')">
-          <div class="street-btn-left">
-            <div class="street-icon icon-stopgo">🚦</div>
-            <div class="street-text">
-              <div class="street-name">Holbeach Avenue</div>
-              <div class="street-sub">3–5 August 2026</div>
-            </div>
-          </div>
-          <span class="street-tag tag-stopgo">Stop / slow</span>
-          <svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="4,6 8,10 12,6"/></svg>
-        </button>
-        <div class="street-detail" id="detail-holbeach">
-          <div class="detail-inner">
-            <div class="notice">Holbeach Avenue stays open but narrows to a single shared lane for three days. Traffic controllers alternate the two directions with radios and portable booms: one side waits while the other goes through. The equipment is removed each evening, so the street is fully open overnight. Speed drops temporarily to 40km/h through the work zone.</div>
-            <div class="fact-grid">
-              <div class="fact"><div class="fact-label">Works start</div><div class="fact-value red">7am Mon 3 August</div></div>
-              <div class="fact"><div class="fact-label">Works end</div><div class="fact-value red">3pm Wed 5 August</div></div>
-              <div class="fact"><div class="fact-label">Daily hours</div><div class="fact-value">7am–3pm only</div></div>
-              <div class="fact"><div class="fact-label">Overnight</div><div class="fact-value grn">Fully open each evening</div></div>
-              <div class="fact"><div class="fact-label">Work type</div><div class="fact-value">Speed hump + kerb blister + median garden bed</div></div>
-              <div class="fact"><div class="fact-label">Temp speed limit</div><div class="fact-value">40km/h through work zone</div></div>
-              <div class="fact"><div class="fact-label">If delayed</div><div class="fact-value">From 10 August 2026</div></div>
-              <div class="fact"><div class="fact-label">Design plan</div><div class="fact-value">H0202</div></div>
-            </div>
-            <div class="info-box">These are the last works in the schedule, finishing on the same day the project closes: 5 August. The kerb blister and median garden bed are permanent and stay after works are done.</div>
-            <div class="contact-row">
-              <span class="contact-icon">📞</span>
-              <div class="contact-text"><strong>Mitchell Montgomery</strong>, SSTC Group (on-site)<br>0468 000 737 · Office: 02 9584 0426</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- BARDEN ST -->
-      <div class="street-row">
-        <button class="street-btn" id="btn-barden" onclick="toggle('barden')">
-          <div class="street-btn-left">
-            <div class="street-icon icon-marking">🎨</div>
-            <div class="street-text">
-              <div class="street-name">Barden Street</div>
-              <div class="street-sub">August 2026, single day</div>
-            </div>
-          </div>
-          <span class="street-tag tag-marking">Line marking</span>
-          <svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="4,6 8,10 12,6"/></svg>
-        </button>
-        <div class="street-detail" id="detail-barden">
-          <div class="detail-inner">
-            <div class="notice">Barden Street gets a single-day visit in August. Coloured and textured road surface is applied at intersections, a visual warning treatment that makes the intersection point stand out from the surrounding road. No speed humps, no multi-day closure.</div>
-            <div class="fact-grid">
-              <div class="fact"><div class="fact-label">Approx. date</div><div class="fact-value">August 2026 (TBC)</div></div>
-              <div class="fact"><div class="fact-label">Duration</div><div class="fact-value">Single day</div></div>
-              <div class="fact"><div class="fact-label">Work type</div><div class="fact-value">At-grade contrasting pavement at intersections</div></div>
-              <div class="fact"><div class="fact-label">Disruption level</div><div class="fact-value grn">Low, one day only</div></div>
-            </div>
-            <div class="contact-row">
-              <span class="contact-icon">📞</span>
-              <div class="contact-text"><strong>Mitchell Montgomery</strong>, SSTC Group (on-site)<br>0468 000 737 · Office: 02 9584 0426</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- FANNING ST -->
-      <div class="street-row">
-        <button class="street-btn" id="btn-fanning" onclick="toggle('fanning')">
-          <div class="street-btn-left">
-            <div class="street-icon icon-marking">🎨</div>
-            <div class="street-text">
-              <div class="street-name">Fanning Street</div>
-              <div class="street-sub">August 2026, single day</div>
-            </div>
-          </div>
-          <span class="street-tag tag-marking">Line marking</span>
-          <svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="4,6 8,10 12,6"/></svg>
-        </button>
-        <div class="street-detail" id="detail-fanning">
-          <div class="detail-inner">
-            <div class="notice">One day in August. Coloured pavement goes in at the intersections, the same treatment as Barden, Hart, and Station streets. Short closure, no overnight disruption.</div>
-            <div class="fact-grid">
-              <div class="fact"><div class="fact-label">Approx. date</div><div class="fact-value">August 2026 (TBC)</div></div>
-              <div class="fact"><div class="fact-label">Duration</div><div class="fact-value">Single day</div></div>
-              <div class="fact"><div class="fact-label">Work type</div><div class="fact-value">At-grade contrasting pavement at intersections</div></div>
-              <div class="fact"><div class="fact-label">Disruption level</div><div class="fact-value grn">Low, one day only</div></div>
-            </div>
-            <div class="contact-row">
-              <span class="contact-icon">📞</span>
-              <div class="contact-text"><strong>Mitchell Montgomery</strong>, SSTC Group (on-site)<br>0468 000 737 · Office: 02 9584 0426</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- HART ST -->
-      <div class="street-row">
-        <button class="street-btn" id="btn-hart" onclick="toggle('hart')">
-          <div class="street-btn-left">
-            <div class="street-icon icon-marking">🎨</div>
-            <div class="street-text">
-              <div class="street-name">Hart Street</div>
-              <div class="street-sub">August 2026, single day</div>
-            </div>
-          </div>
-          <span class="street-tag tag-marking">Line marking</span>
-          <svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="4,6 8,10 12,6"/></svg>
-        </button>
-        <div class="street-detail" id="detail-hart">
-          <div class="detail-inner">
-            <div class="notice">Hart Street covers two TGS diagram zones (J and K), which means the coloured pavement treatment is applied at more than one intersection point along the street. Still a single-day visit.</div>
-            <div class="fact-grid">
-              <div class="fact"><div class="fact-label">Approx. date</div><div class="fact-value">August 2026 (TBC)</div></div>
-              <div class="fact"><div class="fact-label">Duration</div><div class="fact-value">Single day</div></div>
-              <div class="fact"><div class="fact-label">Work type</div><div class="fact-value">Contrasting pavement, two intersection points</div></div>
-              <div class="fact"><div class="fact-label">Disruption level</div><div class="fact-value grn">Low, one day only</div></div>
-            </div>
-            <div class="contact-row">
-              <span class="contact-icon">📞</span>
-              <div class="contact-text"><strong>Mitchell Montgomery</strong>, SSTC Group (on-site)<br>0468 000 737 · Office: 02 9584 0426</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- STATION ST -->
-      <div class="street-row">
-        <button class="street-btn" id="btn-station" onclick="toggle('station')">
-          <div class="street-btn-left">
-            <div class="street-icon icon-marking">🎨</div>
-            <div class="street-text">
-              <div class="street-name">Station Street</div>
-              <div class="street-sub">August 2026, single day</div>
-            </div>
-          </div>
-          <span class="street-tag tag-marking">Line marking</span>
-          <svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="4,6 8,10 12,6"/></svg>
-        </button>
-        <div class="street-detail" id="detail-station">
-          <div class="detail-inner">
-            <div class="notice">One day in August for coloured pavement at intersections. Same treatment as the other line marking streets, low disruption, no overnight closure.</div>
-            <div class="fact-grid">
-              <div class="fact"><div class="fact-label">Approx. date</div><div class="fact-value">August 2026 (TBC)</div></div>
-              <div class="fact"><div class="fact-label">Duration</div><div class="fact-value">Single day</div></div>
-              <div class="fact"><div class="fact-label">Work type</div><div class="fact-value">At-grade contrasting pavement at intersections</div></div>
-              <div class="fact"><div class="fact-label">Disruption level</div><div class="fact-value grn">Low, one day only</div></div>
-            </div>
-            <div class="contact-row">
-              <span class="contact-icon">📞</span>
-              <div class="contact-text"><strong>Mitchell Montgomery</strong>, SSTC Group (on-site)<br>0468 000 737 · Office: 02 9584 0426</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- UNION ST -->
-      <div class="street-row">
-        <button class="street-btn" id="btn-union" onclick="toggle('union')">
-          <div class="street-btn-left">
-            <div class="street-icon icon-zone">🔵</div>
-            <div class="street-text">
-              <div class="street-name">Union Street</div>
-              <div class="street-sub">Speed limit change only</div>
-            </div>
-          </div>
-          <span class="street-tag tag-zone">Speed zone</span>
-          <svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="4,6 8,10 12,6"/></svg>
-        </button>
-        <div class="street-detail" id="detail-union">
-          <div class="detail-inner">
-            <div class="notice">Union Street is not getting road works. The only change is a permanent speed limit reduction from 50km/h to 40km/h between Princes Highway and School Avenue. No closures, no construction noise. New speed limit signs go up once Transport for NSW gives its formal approval, which is still being sought at the time of this agenda.</div>
-            <div class="fact-grid">
-              <div class="fact"><div class="fact-label">Current limit</div><div class="fact-value">50 km/h</div></div>
-              <div class="fact"><div class="fact-label">Proposed limit</div><div class="fact-value red">40 km/h</div></div>
-              <div class="fact"><div class="fact-label">Section</div><div class="fact-value">Princes Hwy to School Ave</div></div>
-              <div class="fact"><div class="fact-label">Status</div><div class="fact-value">Awaiting TfNSW concurrence</div></div>
-              <div class="fact"><div class="fact-label">Road works</div><div class="fact-value grn">None, signs only</div></div>
-              <div class="fact"><div class="fact-label">When effective</div><div class="fact-value">After TfNSW approval (date TBC)</div></div>
-            </div>
-            <div class="info-box">You won't get a letterbox notice for this one. Watch for new 40km/h signs appearing on the street.</div>
-            <div class="contact-row">
-              <span class="contact-icon">📞</span>
-              <div class="contact-text"><strong>Mitchell Montgomery</strong>, SSTC Group (on-site)<br>0468 000 737 · Office: 02 9584 0426</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /street-list -->
-      <div class="detail-panel">
-        <div class="panel-empty">
-          <div style="background:var(--accent-bg);border:1px solid #bfdbfe;border-radius:10px;padding:18px 22px;display:flex;align-items:center;gap:14px;max-width:380px;margin:0 auto;">
-            <span style="font-size:22px;line-height:1;">←</span>
-            <p style="font-size:14px;font-weight:600;color:var(--accent);line-height:1.45;margin:0;">Select a street from the list to see your closure dates and what's being built</p>
-          </div>
-        </div>
-      </div>
-    </div><!-- /streets-body -->
-  </div><!-- /card -->
-
-  <!-- FOR ALL RESIDENTS -->
-  <div class="card footer-card">
-    <div class="card-body">
-      <p style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--ink3);margin-bottom:10px;">For all affected residents</p>
-      <ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:7px;">
-        <li class="prose">You should get a letterbox notice at least 14 days before works start on your street — so by mid-June for the first closures.</li>
-        <li class="prose">Footpaths stay open throughout. Fencing and pedestrian signs are put in place at each site.</li>
-        <li class="prose">Emergency vehicles have priority access at all times.</li>
-        <li class="prose">No bus routes run on any of the closed streets.</li>
-        <li class="prose">Works are subject to council approving the plan at the 18 May 2026 meeting.</li>
-      </ul>
-    </div>
-  </div>
-
-</div><!-- /page -->
-
-<div class="footer">
-  Based on Inner West Council traffic committee agenda · 18 May 2026<br>
-  Data sourced from Traffic Management Plan TMP-5877 and Tempe South LATM design HD 202 r4
+<div class="filter-bar" id="filterBar">
+  <span class="filter-label">Suburb</span>
+  <button class="chip active" data-suburb="all" onclick="setFilter('all')">All</button>
 </div>
 
+<main class="page">
+  <p class="section-heading" id="sectionHeading">18 May 2026 — Local Transport Forum</p>
+  <div class="card-grid" id="cardGrid">
+    <div class="empty-state">Loading…</div>
+  </div>
+</main>
+
 <script>
-  var isDesktop = function() { return window.innerWidth >= 820; };
+  const TYPE_LABELS = {
+    crossing: 'Crossing',
+    latm:     'Traffic calming',
+    parking:  'Parking',
+    speed:    'Speed limit',
+    event:    'Event closure',
+  };
 
-  function toggle(id) {
-    var btn    = document.getElementById('btn-' + id);
-    var detail = document.getElementById('detail-' + id);
-    var isOpen = detail.classList.contains('open');
+  const TYPE_CLASS = {
+    crossing: 'tag-crossing',
+    latm:     'tag-latm',
+    parking:  'tag-parking',
+    speed:    'tag-speed',
+    event:    'tag-event',
+  };
 
-    document.querySelectorAll('.street-detail').forEach(function(d) { d.classList.remove('open'); });
-    document.querySelectorAll('.street-btn').forEach(function(b)    { b.classList.remove('open'); });
+  function statusLabel(item) {
+    const today = new Date().toISOString().slice(0, 10);
+    if (item.status === 'works-coming')   return { text: 'Works coming', cls: 'status-works-coming' };
+    if (item.status === 'council-confirmed') return { text: 'Council confirmed', cls: 'status-confirmed' };
+    if (item.status === 'forum-yes')      return { text: 'Forum approved', cls: 'status-forum-yes' };
+    if (item.status === 'forum-amended')  return { text: 'Approved with changes', cls: 'status-forum-amended' };
+    if (item.status === 'forum-no')       return { text: 'Not approved', cls: 'status-forum-no' };
+    if (item.status === 'on-agenda') {
+      if (item.meetingDate < today) return { text: 'Outcome coming', cls: 'status-held' };
+      return { text: 'On the agenda', cls: 'status-on-agenda' };
+    }
+    return { text: item.status, cls: 'status-on-agenda' };
+  }
 
-    if (!isOpen) {
-      detail.classList.add('open');
-      btn.classList.add('open');
+  function fmtDate(iso) {
+    if (!iso) return '';
+    const [y, m, d] = iso.split('-');
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return `${parseInt(d)} ${months[parseInt(m)-1]} ${y}`;
+  }
 
-      if (isDesktop()) {
-        var panel = document.querySelector('.detail-panel');
-        var name  = btn.querySelector('.street-name').textContent;
-        var inner = detail.querySelector('.detail-inner').innerHTML;
-        panel.innerHTML = '<div class="panel-street-title">' + name + '</div>'
-                        + '<div class="detail-inner">' + inner + '</div>';
-      } else {
-        setTimeout(function() {
-          btn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }, 50);
-      }
-    } else if (isDesktop()) {
-      document.querySelector('.detail-panel').innerHTML =
-        '<div class="panel-empty">Select a street from the list to see details.</div>';
+  function renderCard(item) {
+    const status = statusLabel(item);
+    const typeLabel = TYPE_LABELS[item.type] || item.type;
+    const typeCls   = TYPE_CLASS[item.type]  || '';
+
+    const suburbTags = item.suburbs.map(s =>
+      `<span class="tag tag-suburb">${s}</span>`
+    ).join('');
+
+    const linkHref = item.detailPage || item.agendaUrl;
+    const linkText = item.detailPage ? 'Full details' : 'Council source';
+    const linkTarget = item.detailPage ? '' : ' target="_blank" rel="noopener"';
+
+    return `<a class="item-card" href="${linkHref}"${linkTarget} data-suburbs="${item.suburbs.join(',')}">
+  <div class="card-tags">
+    <span class="tag ${typeCls}">${typeLabel}</span>
+    ${suburbTags}
+  </div>
+  <div class="card-headline">${item.headline}</div>
+  <div class="card-footer">
+    <span class="card-meeting">LTF ${fmtDate(item.meetingDate)}</span>
+    <span class="status-badge ${status.cls}">${status.text}</span>
+  </div>
+</a>`;
+  }
+
+  let allItems = [];
+  let activeFilter = 'all';
+
+  function setFilter(suburb) {
+    activeFilter = suburb;
+    document.querySelectorAll('#filterBar .chip').forEach(c => {
+      c.classList.toggle('active', c.dataset.suburb === suburb);
+    });
+    renderGrid();
+  }
+
+  function renderGrid() {
+    const grid = document.getElementById('cardGrid');
+    const visible = activeFilter === 'all'
+      ? allItems
+      : allItems.filter(item => item.suburbs.includes(activeFilter) || item.suburbs.length === 0);
+
+    if (visible.length === 0) {
+      grid.innerHTML = '<div class="empty-state">No items for this suburb yet.</div>';
+    } else {
+      grid.innerHTML = visible.map(renderCard).join('');
     }
   }
 
-  // inject council link + close button at the bottom of each mobile detail panel
-  document.querySelectorAll('.street-row').forEach(function(row) {
-    var streetBtn = row.querySelector('.street-btn');
-    var id = streetBtn.id.replace('btn-', '');
-    var inner = row.querySelector('.detail-inner');
+  function buildFilterChips(items) {
+    const bar = document.getElementById('filterBar');
+    const suburbs = [...new Set(items.flatMap(i => i.suburbs))].sort();
+    suburbs.forEach(s => {
+      const btn = document.createElement('button');
+      btn.className = 'chip';
+      btn.dataset.suburb = s;
+      btn.textContent = s;
+      btn.onclick = () => setFilter(s);
+      bar.appendChild(btn);
+    });
+  }
 
-    var councilLink = document.createElement('div');
-    councilLink.className = 'contact-row';
-    councilLink.innerHTML = '<span class="contact-icon">🏛️</span>'
-      + '<div class="contact-text"><a href="https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#PDF2_ReportName_69114" target="_blank" rel="noopener" style="color:var(--accent);font-weight:700;">View Item 4 on the Inner West Council website</a><br>Full council agenda — satellite photos and engineering plans</div>';
-    inner.appendChild(councilLink);
+  // Data lives in data/items.json — copy updated content here when adding items.
+  const ITEMS = [
+  {
+    "id": "ltf-18may2026-01", "meeting": "ltf-18may2026", "item": 1,
+    "type": "crossing", "suburbs": ["Balmain"], "streets": ["Darling St", "Curtis Rd"],
+    "headline": "New raised crossing and roundabout — Darling St at Curtis Rd",
+    "status": "on-agenda", "meetingDate": "2026-05-18",
+    "minutesDate": null, "resolution": null, "worksStart": null, "detailPage": null,
+    "agendaUrl": "https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#69071",
+    "minutesUrl": null
+  },
+  {
+    "id": "ltf-18may2026-02", "meeting": "ltf-18may2026", "item": 2,
+    "type": "parking", "suburbs": ["Annandale"], "streets": ["Nelson Lane"],
+    "headline": "No parking zone extended — Nelson Lane",
+    "status": "on-agenda", "meetingDate": "2026-05-18",
+    "minutesDate": null, "resolution": null, "worksStart": null, "detailPage": null,
+    "agendaUrl": "https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#69072",
+    "minutesUrl": null
+  },
+  {
+    "id": "ltf-18may2026-03", "meeting": "ltf-18may2026", "item": 3,
+    "type": "latm", "suburbs": ["Marrickville"], "streets": ["Warburton St"],
+    "headline": "Kerb blister going in — Warburton St",
+    "status": "on-agenda", "meetingDate": "2026-05-18",
+    "minutesDate": null, "resolution": null, "worksStart": null, "detailPage": null,
+    "agendaUrl": "https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#69056",
+    "minutesUrl": null
+  },
+  {
+    "id": "ltf-18may2026-04", "meeting": "ltf-18may2026", "item": 4,
+    "type": "latm", "suburbs": ["Tempe"], "streets": ["Edwin St", "Tramway St", "Wentworth St", "Holbeach Ave"],
+    "headline": "Road closures for traffic calming works — Tempe South (Bunnings LATM)",
+    "status": "on-agenda", "meetingDate": "2026-05-18",
+    "minutesDate": null, "resolution": null, "worksStart": "2026-07-06",
+    "detailPage": "meetings/ltf-18may2026/tempe-south/",
+    "agendaUrl": "https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#69114",
+    "minutesUrl": null
+  },
+  {
+    "id": "ltf-18may2026-05", "meeting": "ltf-18may2026", "item": 5,
+    "type": "event", "suburbs": ["Marrickville"], "streets": ["Centennial St", "Woodland St", "Holmesdale St"],
+    "headline": "Temporary road closures — Beer, Footy and Food Festival",
+    "status": "on-agenda", "meetingDate": "2026-05-18",
+    "minutesDate": null, "resolution": null, "worksStart": null, "detailPage": null,
+    "agendaUrl": "https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#69115",
+    "minutesUrl": null
+  },
+  {
+    "id": "ltf-18may2026-06", "meeting": "ltf-18may2026", "item": 6,
+    "type": "crossing", "suburbs": ["Marrickville"], "streets": ["Illawarra Rd", "Wharf St"],
+    "headline": "New raised crossing — Illawarra Rd at Wharf St",
+    "status": "on-agenda", "meetingDate": "2026-05-18",
+    "minutesDate": null, "resolution": null, "worksStart": null, "detailPage": null,
+    "agendaUrl": "https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#69117",
+    "minutesUrl": null
+  },
+  {
+    "id": "ltf-18may2026-07", "meeting": "ltf-18may2026", "item": 7,
+    "type": "crossing", "suburbs": ["Marrickville"], "streets": ["Illawarra Rd", "Grove St"],
+    "headline": "New raised crossing — Illawarra Rd at Grove St",
+    "status": "on-agenda", "meetingDate": "2026-05-18",
+    "minutesDate": null, "resolution": null, "worksStart": null, "detailPage": null,
+    "agendaUrl": "https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#69118",
+    "minutesUrl": null
+  },
+  {
+    "id": "ltf-18may2026-08", "meeting": "ltf-18may2026", "item": 8,
+    "type": "parking", "suburbs": ["Marrickville"], "streets": ["Smidmore St", "Edinburgh Rd"],
+    "headline": "No stopping zone extended — Smidmore St at Edinburgh Rd",
+    "status": "on-agenda", "meetingDate": "2026-05-18",
+    "minutesDate": null, "resolution": null, "worksStart": null, "detailPage": null,
+    "agendaUrl": "https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#69125",
+    "minutesUrl": null
+  },
+  {
+    "id": "ltf-18may2026-09", "meeting": "ltf-18may2026", "item": 9,
+    "type": "latm", "suburbs": ["Summer Hill"], "streets": ["Nowranie St", "Smith St"],
+    "headline": "Kerb extensions — Nowranie St at Smith St",
+    "status": "on-agenda", "meetingDate": "2026-05-18",
+    "minutesDate": null, "resolution": null, "worksStart": null, "detailPage": null,
+    "agendaUrl": "https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#69122",
+    "minutesUrl": null
+  },
+  {
+    "id": "ltf-18may2026-10", "meeting": "ltf-18may2026", "item": 10,
+    "type": "crossing", "suburbs": ["Ashbury"], "streets": ["Hardy St", "Mount St"],
+    "headline": "New raised crossing and kerb extensions — Hardy St at Mount St",
+    "status": "on-agenda", "meetingDate": "2026-05-18",
+    "minutesDate": null, "resolution": null, "worksStart": null, "detailPage": null,
+    "agendaUrl": "https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#69123",
+    "minutesUrl": null
+  },
+  {
+    "id": "ltf-18may2026-11", "meeting": "ltf-18may2026", "item": 11,
+    "type": "crossing", "suburbs": ["Leichhardt"], "streets": ["Allen St"],
+    "headline": "New raised crossing — Allen St",
+    "status": "on-agenda", "meetingDate": "2026-05-18",
+    "minutesDate": null, "resolution": null, "worksStart": null, "detailPage": null,
+    "agendaUrl": "https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#69100",
+    "minutesUrl": null
+  },
+  {
+    "id": "ltf-18may2026-12", "meeting": "ltf-18may2026", "item": 12,
+    "type": "speed", "suburbs": ["Rozelle", "Lilyfield", "Ashfield", "Haberfield"], "streets": [],
+    "headline": "Speed limit dropping from 50 to 40 km/h — Rozelle, Lilyfield, Ashfield, Haberfield",
+    "status": "on-agenda", "meetingDate": "2026-05-18",
+    "minutesDate": null, "resolution": null, "worksStart": null, "detailPage": null,
+    "agendaUrl": "https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#69092",
+    "minutesUrl": null
+  },
+  {
+    "id": "ltf-18may2026-13", "meeting": "ltf-18may2026", "item": 13,
+    "type": "parking", "suburbs": [], "streets": [],
+    "headline": "New kerbside EV charging spaces — various locations across Inner West",
+    "status": "on-agenda", "meetingDate": "2026-05-18",
+    "minutesDate": null, "resolution": null, "worksStart": null, "detailPage": null,
+    "agendaUrl": "https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#69113",
+    "minutesUrl": null
+  },
+  {
+    "id": "ltf-18may2026-14", "meeting": "ltf-18may2026", "item": 14,
+    "type": "parking", "suburbs": ["Marrickville"], "streets": [],
+    "headline": "Resident parking scheme proposed — Mackey Park area",
+    "status": "on-agenda", "meetingDate": "2026-05-18",
+    "minutesDate": null, "resolution": null, "worksStart": null, "detailPage": null,
+    "agendaUrl": "https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#69119",
+    "minutesUrl": null
+  },
+  {
+    "id": "ltf-18may2026-15", "meeting": "ltf-18may2026", "item": 15,
+    "type": "parking", "suburbs": ["Marrickville"], "streets": ["Schwebel St"],
+    "headline": "New angled parking — Schwebel St",
+    "status": "on-agenda", "meetingDate": "2026-05-18",
+    "minutesDate": null, "resolution": null, "worksStart": null, "detailPage": null,
+    "agendaUrl": "https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#69120",
+    "minutesUrl": null
+  },
+  {
+    "id": "ltf-18may2026-16", "meeting": "ltf-18may2026", "item": 16,
+    "type": "parking", "suburbs": ["Petersham"], "streets": ["Little Brighton St"],
+    "headline": "No parking restriction — Little Brighton St",
+    "status": "on-agenda", "meetingDate": "2026-05-18",
+    "minutesDate": null, "resolution": null, "worksStart": null, "detailPage": null,
+    "agendaUrl": "https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#69116",
+    "minutesUrl": null
+  },
+  {
+    "id": "ltf-18may2026-17", "meeting": "ltf-18may2026", "item": 17,
+    "type": "parking", "suburbs": ["Leichhardt"], "streets": ["Lords Rd", "Davies St"],
+    "headline": "Resident parking scheme proposed — Lords Rd and Davies St",
+    "status": "on-agenda", "meetingDate": "2026-05-18",
+    "minutesDate": null, "resolution": null, "worksStart": null, "detailPage": null,
+    "agendaUrl": "https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#69121",
+    "minutesUrl": null
+  }
+  ];
 
-    var closeBtn = document.createElement('button');
-    closeBtn.className = 'close-btn';
-    closeBtn.textContent = 'Close';
-    closeBtn.onclick = function() { toggle(id); };
-    inner.appendChild(closeBtn);
-  });
+  allItems = ITEMS;
+  buildFilterChips(ITEMS);
+  renderGrid();
 </script>
 </body>
 </html>

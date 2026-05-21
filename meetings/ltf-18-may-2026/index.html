@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>18 May 2026 — Local Transport Forum</title>
+<meta property="og:title" content="18 May 2026 — Local Transport Forum">
+<meta property="og:description" content="Plain-language summaries of all 17 items from the Inner West Local Transport Forum meeting on 18 May 2026.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<style>
+  /* ── AGENDA ITEMS ── */
+  .context-card h2 { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+
+  .items-head {
+    padding: 14px 16px 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .items-head h2 { font-size: 14px; font-weight: 700; color: var(--ink); }
+  .items-head p  { font-size: 13px; color: var(--ink3); margin-top: 3px; }
+
+  .items-body { display: flex; }
+
+  .item-list { width: 100%; overflow-y: auto; }
+
+  .item-row { border-bottom: 1px solid var(--border); }
+  .item-row:last-child { border-bottom: none; }
+
+  .item-btn {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 12px 16px;
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .item-btn:hover { background: var(--bg); }
+  .item-btn.open  { background: var(--accent-bg); }
+
+  .item-num {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ink3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+  .item-btn.open .item-num {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .item-text  { flex: 1; min-width: 0; }
+  .item-title { font-size: 13px; font-weight: 600; color: var(--ink); line-height: 1.35; }
+  .item-sub   { font-size: 12px; color: var(--ink3); margin-top: 2px; }
+
+  .item-right {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    margin-top: 1px;
+  }
+
+  .item-tag {
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 4px;
+    padding: 2px 7px;
+    white-space: nowrap;
+  }
+  .tag-latm     { background: var(--warn-bg);   color: var(--warn); }
+  .tag-crossing { background: var(--accent-bg); color: var(--accent); }
+  .tag-parking  { background: #f5f3ff; color: #6d28d9; }
+  .tag-speed    { background: var(--grn-bg);    color: var(--grn); }
+  .tag-event    { background: #fdf4ff; color: #9333ea; }
+
+  .chevron { font-size: 12px; color: var(--ink3); transition: transform .2s; margin-top: 3px; }
+  .item-btn.open .chevron { transform: rotate(180deg); }
+
+  .item-detail { display: none; }
+  .item-detail.open { display: block; border-top: 1px solid var(--border); }
+
+  .detail-inner { padding: 14px 16px; }
+  .detail-inner .prose { font-size: 13px; }
+  .detail-title { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+
+  .detail-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    margin-top: 12px;
+    padding: 7px 12px;
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+  }
+  .detail-link:hover { background: var(--accent-bg); }
+  .detail-link-plain {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: var(--ink3);
+    text-decoration: none;
+    margin-top: 8px;
+  }
+  .detail-link-plain:hover { color: var(--accent); text-decoration: underline; }
+
+  .detail-panel { display: none; }
+
+  /* ── DESKTOP ── */
+  @media (min-width: 820px) {
+    .page { max-width: 1040px; padding: 20px 28px 40px; }
+    .items-body { min-height: 400px; }
+    .item-list {
+      width: 340px;
+      flex-shrink: 0;
+      border-right: 1px solid var(--border);
+      max-height: 600px;
+      overflow-y: auto;
+    }
+    .chevron { display: none; }
+    .item-detail { display: none !important; }
+    .detail-panel {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      padding: 20px;
+      overflow-y: auto;
+      max-height: 600px;
+    }
+    .detail-panel-empty { margin: auto; text-align: center; color: var(--ink3); font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <nav class="breadcrumb">
+      <a href="../../">Inner West Council Meetings</a>
+      <span class="breadcrumb-sep">›</span>
+      <span>18 May 2026</span>
+    </nav>
+    <h1>Local Transport Forum · 18 May 2026</h1>
+    <div class="header-meta">
+      <span class="pill pill-held">Meeting held</span>
+      <span class="pill pill-count">17 items</span>
+    </div>
+  </div>
+</header>
+
+<div class="page">
+
+  <div class="card context-card">
+    <div class="card-body">
+      <h2>What is the Local Transport Forum?</h2>
+      <p class="prose">The Local Transport Forum (LTF) meets monthly to decide on traffic and transport changes across Inner West — new pedestrian crossings, parking restrictions, road closures, and speed limit changes. These decisions directly affect streets in your neighbourhood.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="items-head">
+      <h2>Items on the agenda</h2>
+      <p>Select an item to see what was decided.</p>
+    </div>
+
+    <div class="items-body">
+      <div class="item-list" id="item-list">
+
+        <div class="item-row">
+          <button class="item-btn" id="btn-1" onclick="toggle('1')">
+            <span class="item-num">1</span>
+            <span class="item-text">
+              <span class="item-title">New pedestrian crossing and roundabout — Darling St at Curtis Rd</span>
+              <span class="item-sub">Balmain</span>
+            </span>
+            <span class="item-right"><span class="item-tag tag-crossing">Crossing</span><span class="chevron">▾</span></span>
+          </button>
+          <div class="item-detail" id="detail-1">
+            <div class="detail-inner">
+              <p class="detail-title">Darling Street &amp; Curtis Road, Balmain</p>
+              <p class="prose">A raised pedestrian crossing and roundabout improvements at the Darling St / Curtis Rd intersection. The detailed design plan (10313) was presented for approval.</p>
+              <a class="detail-link-plain" href="https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#PDF2_ReportName_69071" target="_blank">View in council agenda ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="item-row">
+          <button class="item-btn" id="btn-2" onclick="toggle('2')">
+            <span class="item-num">2</span>
+            <span class="item-text">
+              <span class="item-title">No parking zone extended — Nelson Lane</span>
+              <span class="item-sub">Annandale</span>
+            </span>
+            <span class="item-right"><span class="item-tag tag-parking">Parking</span><span class="chevron">▾</span></span>
+          </button>
+          <div class="item-detail" id="detail-2">
+            <div class="detail-inner">
+              <p class="detail-title">Nelson Lane, Annandale</p>
+              <p class="prose">Proposal to extend the existing 'No Parking' zone in Nelson Lane.</p>
+              <a class="detail-link-plain" href="https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#PDF2_ReportName_69072" target="_blank">View in council agenda ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="item-row">
+          <button class="item-btn" id="btn-3" onclick="toggle('3')">
+            <span class="item-num">3</span>
+            <span class="item-text">
+              <span class="item-title">Kerb blister — Warburton Street</span>
+              <span class="item-sub">Marrickville</span>
+            </span>
+            <span class="item-right"><span class="item-tag tag-latm">LATM</span><span class="chevron">▾</span></span>
+          </button>
+          <div class="item-detail" id="detail-3">
+            <div class="detail-inner">
+              <p class="detail-title">Warburton Street, Marrickville</p>
+              <p class="prose">A kerb blister (raised kerb extension) proposed for Warburton Street to narrow the road and slow traffic.</p>
+              <a class="detail-link-plain" href="https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#PDF2_ReportName_69056" target="_blank">View in council agenda ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="item-row">
+          <button class="item-btn" id="btn-4" onclick="toggle('4')">
+            <span class="item-num">4</span>
+            <span class="item-text">
+              <span class="item-title">Road closures for Bunnings LATM works — Tempe South</span>
+              <span class="item-sub">Tempe · Jul–Aug 2026</span>
+            </span>
+            <span class="item-right"><span class="item-tag tag-latm">LATM</span><span class="chevron">▾</span></span>
+          </button>
+          <div class="item-detail" id="detail-4">
+            <div class="detail-inner">
+              <p class="detail-title">Bunnings Tempe South LATM</p>
+              <p class="prose">Temporary full road closures across nine streets in Tempe South over five weeks (July–August 2026). Bunnings Group is funding the works as a condition of development approval for their Tempe store.</p>
+              <a class="detail-link-plain" href="https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#PDF2_ReportName_69114" target="_blank">View in council agenda ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="item-row">
+          <button class="item-btn" id="btn-5" onclick="toggle('5')">
+            <span class="item-num">5</span>
+            <span class="item-text">
+              <span class="item-title">Road closures for Beer, Footy &amp; Food Festival — Henson Park</span>
+              <span class="item-sub">Marrickville · 18 July 2026</span>
+            </span>
+            <span class="item-right"><span class="item-tag tag-event">Event</span><span class="chevron">▾</span></span>
+          </button>
+          <div class="item-detail" id="detail-5">
+            <div class="detail-inner">
+              <p class="detail-title">Centennial St, Woodland St &amp; Holmesdale St, Marrickville</p>
+              <p class="prose">Temporary road closures on three streets around Henson Park for the 2026 Beer, Footy and Food Festival on Saturday 18 July 2026.</p>
+              <a class="detail-link-plain" href="https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#PDF2_ReportName_69115" target="_blank">View in council agenda ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="item-row">
+          <button class="item-btn" id="btn-6" onclick="toggle('6')">
+            <span class="item-num">6</span>
+            <span class="item-text">
+              <span class="item-title">New raised pedestrian crossing — Illawarra Rd at Wharf St</span>
+              <span class="item-sub">Marrickville</span>
+            </span>
+            <span class="item-right"><span class="item-tag tag-crossing">Crossing</span><span class="chevron">▾</span></span>
+          </button>
+          <div class="item-detail" id="detail-6">
+            <div class="detail-inner">
+              <p class="detail-title">Illawarra Road at Wharf Street, Marrickville</p>
+              <p class="prose">A new raised pedestrian crossing at the Illawarra Rd / Wharf St intersection. Design plan 10379.</p>
+              <a class="detail-link-plain" href="https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#PDF2_ReportName_69117" target="_blank">View in council agenda ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="item-row">
+          <button class="item-btn" id="btn-7" onclick="toggle('7')">
+            <span class="item-num">7</span>
+            <span class="item-text">
+              <span class="item-title">New raised pedestrian crossing — Illawarra Rd at Grove St</span>
+              <span class="item-sub">Marrickville</span>
+            </span>
+            <span class="item-right"><span class="item-tag tag-crossing">Crossing</span><span class="chevron">▾</span></span>
+          </button>
+          <div class="item-detail" id="detail-7">
+            <div class="detail-inner">
+              <p class="detail-title">Illawarra Road at Grove Street, Marrickville</p>
+              <p class="prose">A new raised pedestrian crossing at the Illawarra Rd / Grove St intersection. Design plan 10385.</p>
+              <a class="detail-link-plain" href="https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#PDF2_ReportName_69118" target="_blank">View in council agenda ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="item-row">
+          <button class="item-btn" id="btn-8" onclick="toggle('8')">
+            <span class="item-num">8</span>
+            <span class="item-text">
+              <span class="item-title">No stopping zone extended — Smidmore St at Edinburgh Rd</span>
+              <span class="item-sub">Marrickville</span>
+            </span>
+            <span class="item-right"><span class="item-tag tag-parking">Parking</span><span class="chevron">▾</span></span>
+          </button>
+          <div class="item-detail" id="detail-8">
+            <div class="detail-inner">
+              <p class="detail-title">Smidmore Street at Edinburgh Road, Marrickville</p>
+              <p class="prose">Extension of 'No Stopping' restrictions at the signalised intersection of Smidmore St and Edinburgh Rd.</p>
+              <a class="detail-link-plain" href="https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#PDF2_ReportName_69125" target="_blank">View in council agenda ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="item-row">
+          <button class="item-btn" id="btn-9" onclick="toggle('9')">
+            <span class="item-num">9</span>
+            <span class="item-text">
+              <span class="item-title">Kerb extensions — Nowranie St at Smith St</span>
+              <span class="item-sub">Summer Hill</span>
+            </span>
+            <span class="item-right"><span class="item-tag tag-latm">LATM</span><span class="chevron">▾</span></span>
+          </button>
+          <div class="item-detail" id="detail-9">
+            <div class="detail-inner">
+              <p class="detail-title">Nowranie Street at Smith Street, Summer Hill</p>
+              <p class="prose">Proposed kerb extensions (blisters) at the Nowranie St / Smith St intersection to slow traffic and improve pedestrian safety.</p>
+              <a class="detail-link-plain" href="https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#PDF2_ReportName_69122" target="_blank">View in council agenda ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="item-row">
+          <button class="item-btn" id="btn-10" onclick="toggle('10')">
+            <span class="item-num">10</span>
+            <span class="item-text">
+              <span class="item-title">New pedestrian crossing and kerb extensions — Hardy St at Mount St</span>
+              <span class="item-sub">Ashbury</span>
+            </span>
+            <span class="item-right"><span class="item-tag tag-crossing">Crossing</span><span class="chevron">▾</span></span>
+          </button>
+          <div class="item-detail" id="detail-10">
+            <div class="detail-inner">
+              <p class="detail-title">Hardy Street at Mount Street, Ashbury</p>
+              <p class="prose">A new raised pedestrian (zebra) crossing and kerb extensions at the Hardy St / Mount St intersection.</p>
+              <a class="detail-link-plain" href="https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#PDF2_ReportName_69123" target="_blank">View in council agenda ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="item-row">
+          <button class="item-btn" id="btn-11" onclick="toggle('11')">
+            <span class="item-num">11</span>
+            <span class="item-text">
+              <span class="item-title">New raised pedestrian crossing — Allen Street</span>
+              <span class="item-sub">Leichhardt</span>
+            </span>
+            <span class="item-right"><span class="item-tag tag-crossing">Crossing</span><span class="chevron">▾</span></span>
+          </button>
+          <div class="item-detail" id="detail-11">
+            <div class="detail-inner">
+              <p class="detail-title">Allen Street, Leichhardt</p>
+              <p class="prose">A new raised pedestrian crossing on Allen Street, Leichhardt.</p>
+              <a class="detail-link-plain" href="https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#PDF2_ReportName_69100" target="_blank">View in council agenda ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="item-row">
+          <button class="item-btn" id="btn-12" onclick="toggle('12')">
+            <span class="item-num">12</span>
+            <span class="item-text">
+              <span class="item-title">Speed limit drops to 40km/h — Rozelle, Lilyfield, Ashfield North, Haberfield</span>
+              <span class="item-sub">Multiple suburbs</span>
+            </span>
+            <span class="item-right"><span class="item-tag tag-speed">Speed</span><span class="chevron">▾</span></span>
+          </button>
+          <div class="item-detail" id="detail-12">
+            <div class="detail-inner">
+              <p class="detail-title">InnerWest@40 — Areas 1, 2 &amp; 11</p>
+              <p class="prose">Proposed speed limit reduction from 50km/h to 40km/h across three areas: Area 2 (Rozelle and Lilyfield), Area 11 (Ashfield North), and Area 1 (Haberfield). Part of the council's broader InnerWest@40 program.</p>
+              <a class="detail-link-plain" href="https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#PDF2_ReportName_69092" target="_blank">View in council agenda ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="item-row">
+          <button class="item-btn" id="btn-13" onclick="toggle('13')">
+            <span class="item-num">13</span>
+            <span class="item-text">
+              <span class="item-title">New EV kerbside charging spots — all wards</span>
+              <span class="item-sub">Inner West-wide</span>
+            </span>
+            <span class="item-right"><span class="item-tag tag-parking">Parking</span><span class="chevron">▾</span></span>
+          </button>
+          <div class="item-detail" id="detail-13">
+            <div class="detail-inner">
+              <p class="detail-title">EV Kerbside Charging Locations</p>
+              <p class="prose">Proposed locations for new electric vehicle kerbside charging spots across all wards of Inner West.</p>
+              <a class="detail-link-plain" href="https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#PDF2_ReportName_69113" target="_blank">View in council agenda ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="item-row">
+          <button class="item-btn" id="btn-14" onclick="toggle('14')">
+            <span class="item-num">14</span>
+            <span class="item-text">
+              <span class="item-title">Resident parking scheme — Mackey Park area</span>
+              <span class="item-sub">Marrickville</span>
+            </span>
+            <span class="item-right"><span class="item-tag tag-parking">Parking</span><span class="chevron">▾</span></span>
+          </button>
+          <div class="item-detail" id="detail-14">
+            <div class="detail-inner">
+              <p class="detail-title">Mackey Park Resident Parking Scheme</p>
+              <p class="prose">Proposed resident parking scheme for streets in the Mackey Park area of Marrickville.</p>
+              <a class="detail-link-plain" href="https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#PDF2_ReportName_69119" target="_blank">View in council agenda ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="item-row">
+          <button class="item-btn" id="btn-15" onclick="toggle('15')">
+            <span class="item-num">15</span>
+            <span class="item-text">
+              <span class="item-title">New angled parking — Schwebel Street</span>
+              <span class="item-sub">Marrickville</span>
+            </span>
+            <span class="item-right"><span class="item-tag tag-parking">Parking</span><span class="chevron">▾</span></span>
+          </button>
+          <div class="item-detail" id="detail-15">
+            <div class="detail-inner">
+              <p class="detail-title">Schwebel Street, Marrickville</p>
+              <p class="prose">Proposed 45-degree angled parking in Schwebel Street between Station Street and Leofrene Avenue, replacing the current parallel parking.</p>
+              <a class="detail-link-plain" href="https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#PDF2_ReportName_69120" target="_blank">View in council agenda ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="item-row">
+          <button class="item-btn" id="btn-16" onclick="toggle('16')">
+            <span class="item-num">16</span>
+            <span class="item-text">
+              <span class="item-title">No parking restriction — Little Brighton Street</span>
+              <span class="item-sub">Petersham</span>
+            </span>
+            <span class="item-right"><span class="item-tag tag-parking">Parking</span><span class="chevron">▾</span></span>
+          </button>
+          <div class="item-detail" id="detail-16">
+            <div class="detail-inner">
+              <p class="detail-title">Little Brighton Street, Petersham</p>
+              <p class="prose">Proposed 'No Parking' restriction on Little Brighton Street, Petersham.</p>
+              <a class="detail-link-plain" href="https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#PDF2_ReportName_69116" target="_blank">View in council agenda ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="item-row">
+          <button class="item-btn" id="btn-17" onclick="toggle('17')">
+            <span class="item-num">17</span>
+            <span class="item-text">
+              <span class="item-title">Resident parking scheme — Lords Rd &amp; Davies St</span>
+              <span class="item-sub">Leichhardt</span>
+            </span>
+            <span class="item-right"><span class="item-tag tag-parking">Parking</span><span class="chevron">▾</span></span>
+          </button>
+          <div class="item-detail" id="detail-17">
+            <div class="detail-inner">
+              <p class="detail-title">Lords Road &amp; Davies Street, Leichhardt</p>
+              <p class="prose">Proposed resident parking scheme for Lords Road and Davies Street, Leichhardt.</p>
+              <a class="detail-link-plain" href="https://innerwest.infocouncil.biz/Open/2026/05/LTF_18052026_AGN_4285_AT.HTM#PDF2_ReportName_69121" target="_blank">View in council agenda ↗</a>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end item-list -->
+
+      <div class="detail-panel" id="detail-panel">
+        <div class="detail-panel-empty">Select an item to see details</div>
+      </div>
+
+    </div><!-- end items-body -->
+  </div><!-- end card -->
+
+  <div class="footer">
+    Source: <a href="https://innerwest.infocouncil.biz/" target="_blank">innerwest.infocouncil.biz</a> · Agenda of Local Transport Forum, 18 May 2026
+  </div>
+
+</div><!-- end page -->
+
+<script src="../../assets/js/site.js"></script>
+<script>
+  function toggle(id) {
+    const btn    = document.getElementById('btn-' + id);
+    const detail = document.getElementById('detail-' + id);
+    const isOpen = btn.classList.contains('open');
+
+    document.querySelectorAll('.item-btn.open').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('.item-detail.open').forEach(d => d.classList.remove('open'));
+
+    if (!isOpen) {
+      btn.classList.add('open');
+      if (isDesktop()) {
+        const panel = document.getElementById('detail-panel');
+        panel.innerHTML = detail.querySelector('.detail-inner').outerHTML;
+      } else {
+        detail.classList.add('open');
+        setTimeout(() => btn.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+      }
+    } else if (isDesktop()) {
+      document.getElementById('detail-panel').innerHTML = '<div class="detail-panel-empty">Select an item to see details</div>';
+    }
+  }
+</script>
+
+</body>
+</html>
